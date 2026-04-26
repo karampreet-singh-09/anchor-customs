@@ -53,24 +53,14 @@ const CustomizationForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const uploadFile = async (file, bucket, type, details) => {
+  const uploadFile = async (file, bucket, type, details, folderPath) => {
     const fileExt = file.name.split('.').pop();
-    const safeName = (details.fullName || 'customer').replace(/[^a-z0-9]/gi, '_').toLowerCase();
-    const safeAddress = (details.address || '').replace(/[^a-z0-9]/gi, '_').toLowerCase().substring(0, 30);
-    
-    let fileName;
-    if (type === 'cover') {
-      fileName = `cover_${safeName}_${safeAddress}_${Date.now()}.${fileExt}`;
-    } else {
-      fileName = `${safeName}_inner_${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
-    }
+    const fileName = `${folderPath}/${type}_${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
     
     // Compress before upload
-    console.log(`Compressing ${type} photo...`);
     let fileToUpload = file;
     try {
       fileToUpload = await imageCompression(file, compressionOptions);
-      console.log(`Original: ${file.size / 1024 / 1024}MB, Compressed: ${fileToUpload.size / 1024 / 1024}MB`);
     } catch (e) {
       console.warn('Compression failed, uploading original', e);
     }
@@ -131,14 +121,18 @@ const CustomizationForm = () => {
     setUploadProgress(5);
 
     try {
-      const coverUrl = await uploadFile(coverPhoto, 'photos', 'cover', formData);
+      // Create a unique folder name for this customer and order
+      const safeName = formData.fullName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+      const folderPath = `${safeName}_${Date.now()}`;
+
+      const coverUrl = await uploadFile(coverPhoto, 'photos', 'cover', formData, folderPath);
       setUploadProgress(30);
       
       const photoUrls = [];
       const totalPhotos = photos.length;
       
       for (let i = 0; i < totalPhotos; i++) {
-        const url = await uploadFile(photos[i], 'photos', 'inner', formData);
+        const url = await uploadFile(photos[i], 'photos', 'inner', formData, folderPath);
         photoUrls.push(url);
         setUploadProgress(30 + ((i + 1) / totalPhotos) * 65);
       }
