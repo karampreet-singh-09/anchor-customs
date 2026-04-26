@@ -81,8 +81,8 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <button className="mobile-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} style={{ display: 'none', background: 'none', border: 'none' }}>
-          {isMenuOpen ? <X /> : <Menu />}
+        <button className="mobile-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} style={{ display: 'none', background: 'none', border: 'none', color: 'var(--text)', cursor: 'pointer' }}>
+          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
@@ -106,13 +106,20 @@ const Navbar = () => {
           top: 100%;
           left: 0;
           right: 0;
-          background: white;
+          background: var(--primary);
           padding: 2rem;
           display: flex;
           flex-direction: column;
           gap: 1.5rem;
           border-bottom: 1px solid var(--border);
           box-shadow: var(--shadow-lg);
+          z-index: 1001;
+        }
+        .mobile-menu a {
+          color: var(--text);
+          font-weight: 600;
+          font-size: 1.1rem;
+          text-decoration: none;
         }
       `}</style>
       
