@@ -131,6 +131,9 @@ const Navbar = () => {
           <Link to="/cart" onClick={() => setIsMenuOpen(false)}>Cart ({cartItems.length})</Link>
           {currentUser ? (
             <>
+              {isAdmin && (
+                <Link to="/admin" onClick={() => setIsMenuOpen(false)} style={{ color: 'var(--accent)' }}>ADMIN CONTROL</Link>
+              )}
               <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>Dashboard</Link>
               <button 
                 onClick={() => { handleLogout(); setIsMenuOpen(false); }} 
