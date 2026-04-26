@@ -62,34 +62,68 @@ const Checkout = () => {
     }
   };
 
+  const verifyPayment = async (paymentResponse, orderId) => {
+    try {
+      console.log('Sending to backend for verification...');
+      
+      const { data, error } = await supabase.functions.invoke('verify-payment', {
+        body: { 
+          razorpay_order_id: paymentResponse.razorpay_order_id,
+          razorpay_payment_id: paymentResponse.razorpay_payment_id,
+          razorpay_signature: paymentResponse.razorpay_signature,
+          order_id: orderId 
+        }
+      });
+
+      if (error || !data.success) throw new Error(error?.message || 'Verification failed');
+      
+      return true;
+    } catch (err) {
+      console.error('Verification failed:', err);
+      return false;
+    }
+  };
+
   const handlePayment = async () => {
     setIsProcessing(true);
+    
+    try {
+      // 1. Load Razorpay Script
+      const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
+      if (!res) {
+        toast.error('Razorpay SDK failed to load. Are you online?');
+        setIsProcessing(false);
+        return;
+      }
 
-    const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
+      // 2. Open Razorpay Popup
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_your_key', 
+        amount: cartTotal * 100,
+        currency: 'INR',
+        name: 'Anchor Customs',
+        description: 'Photo Magazine Order',
+        handler: async function (response) {
+          // Send to our secure function to verify and save
+          await saveOrderToSupabase(response);
+        },
+        prefill: {
+          name: currentUser?.user_metadata?.full_name || '',
+          email: currentUser?.email || '',
+        },
+        theme: {
+          color: '#1a2238',
+        },
+      };
 
-    if (!res) {
-      toast.error('Razorpay SDK failed to load. Are you online?');
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (err) {
+      toast.error('Payment initialization failed');
+      console.error(err);
+    } finally {
       setIsProcessing(false);
-      return;
     }
-
-    const options = {
-      key: import.meta.env.VITE_RAZORPAY_KEY_ID || '', 
-      amount: cartTotal * 100, 
-      currency: 'INR',
-      name: 'Anchor Customs',
-      description: 'Order Payment',
-      prefill: {
-        name: currentUser?.user_metadata?.full_name || '',
-        email: currentUser?.email || '',
-      },
-      handler: saveOrderToSupabase,
-      theme: { color: '#1A2238' },
-    };
-
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
-    setIsProcessing(false);
   };
 
   if (isSuccess) {

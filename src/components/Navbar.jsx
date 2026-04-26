@@ -26,6 +26,7 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="desktop-menu" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+          <Link to="/" className="nav-link">Home</Link>
           <Link to="/gallery" className="nav-link">Gallery</Link>
           <Link to="/contact" className="nav-link">Contact</Link>
           
@@ -53,10 +54,24 @@ const Navbar = () => {
             </Link>
 
             {currentUser ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <Link to="/dashboard"><User size={20} /></Link>
-                <button onClick={handleLogout} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-                  <LogOut size={20} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
+                <Link to="/dashboard" aria-label="Dashboard"><User size={20} /></Link>
+                <button 
+                  onClick={handleLogout} 
+                  style={{ 
+                    background: 'none', 
+                    border: 'none', 
+                    cursor: 'pointer', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '0.4rem', 
+                    padding: 0,
+                    color: 'inherit'
+                  }}
+                  className="nav-link"
+                >
+                  <LogOut size={18} />
+                  <span style={{ fontSize: '0.7rem' }}>Logout</span>
                 </button>
               </div>
             ) : (
@@ -103,6 +118,7 @@ const Navbar = () => {
       
       {isMenuOpen && (
         <div className="mobile-menu">
+          <Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
           <Link to="/gallery" onClick={() => setIsMenuOpen(false)}>Gallery</Link>
           <Link to="/contact" onClick={() => setIsMenuOpen(false)}>Contact</Link>
           <Link to="/cart" onClick={() => setIsMenuOpen(false)}>Cart ({cartItems.length})</Link>

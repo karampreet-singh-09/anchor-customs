@@ -38,10 +38,10 @@ const TemplateDetail = () => {
           </motion.div>
 
           {/* Details */}
-          <div>
-            <span style={{ color: 'var(--accent)', fontWeight: 'bold', textTransform: 'uppercase' }}>{template.category}</span>
-            <h1 style={{ fontSize: '3rem', margin: '1rem 0' }}>{template.name}</h1>
-            <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)', marginBottom: '2rem' }}>
+          <div style={{ textAlign: 'center' }} className="details-stack">
+            <span style={{ color: 'var(--accent)', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '2px' }}>{template.category}</span>
+            <h1 className="responsive-title" style={{ margin: '1rem 0' }}>{template.name}</h1>
+            <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)', marginBottom: '2rem', lineHeight: '1.6' }}>
               {template.description}
             </p>
 

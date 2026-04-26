@@ -20,6 +20,11 @@ import Auth from './pages/Auth/Auth';
 import Dashboard from './pages/Dashboard/Dashboard';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 
+import Terms from './pages/Legal/Terms';
+import Privacy from './pages/Legal/Privacy';
+import Refund from './pages/Legal/Refund';
+import Shipping from './pages/Legal/Shipping';
+
 function App() {
   return (
     <AuthProvider>
@@ -40,7 +45,23 @@ function App() {
                 <Route path="/signup" element={<Auth type="signup" />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/admin" element={<AdminDashboard />} />
-                <Route path="/contact" element={<div className="section-padding container"><h1>Contact Us</h1><p>Email: hello@anchorcustoms.com</p></div>} />
+                
+                {/* Legal Pages for Razorpay Compliance */}
+                <Route path="/terms" element={<Terms />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/refund" element={<Refund />} />
+                <Route path="/shipping" element={<Shipping />} />
+                
+                <Route path="/contact" element={
+                  <div className="section-padding container" style={{ maxWidth: '800px' }}>
+                    <h1 style={{ marginBottom: '2rem' }}>Contact Us</h1>
+                    <div className="card" style={{ padding: '2rem' }}>
+                      <p><strong>Support Email:</strong> hello@anchorcustoms.com</p>
+                      <p><strong>WhatsApp Support:</strong> +91 99999 88888</p>
+                      <p><strong>Office Address:</strong> Anchor Customs, High Street Mall, New Delhi, India - 110001</p>
+                    </div>
+                  </div>
+                } />
                 <Route path="*" element={<Navigate to="/" />} />
               </Routes>
             </main>

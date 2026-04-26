@@ -37,10 +37,10 @@ const Cart = () => {
       <div className="container">
         <h1 style={{ marginBottom: '3rem' }}>Your Shopping Cart</h1>
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'start' }}>
+        <div className="cart-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'start' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {cartItems.map((item) => (
-              <div key={item.id} className="card" style={{ padding: '1.5rem', display: 'flex', gap: '1.5rem' }}>
+              <div key={item.id} className="card cart-item-card" style={{ padding: '1.5rem', display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
                 <img src={item.coverPhoto} alt="Cover" style={{ width: '100px', height: '130px', objectFit: 'cover', borderRadius: '4px' }} />
                 <div style={{ flex: 1 }}>
                   <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>{item.templateName}</h3>

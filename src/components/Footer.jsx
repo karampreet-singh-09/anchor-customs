@@ -20,12 +20,12 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>Quick Links</h3>
+            <h3 style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>Policies</h3>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-              <li><Link to="/gallery" style={{ color: 'rgba(255,255,255,0.7)' }}>Templates</Link></li>
-              <li><Link to="/contact" style={{ color: 'rgba(255,255,255,0.7)' }}>Contact Us</Link></li>
-              <li><Link to="/login" style={{ color: 'rgba(255,255,255,0.7)' }}>My Account</Link></li>
+              <li><Link to="/terms" style={{ color: 'rgba(255,255,255,0.7)' }}>Terms & Conditions</Link></li>
               <li><Link to="/privacy" style={{ color: 'rgba(255,255,255,0.7)' }}>Privacy Policy</Link></li>
+              <li><Link to="/refund" style={{ color: 'rgba(255,255,255,0.7)' }}>Refund Policy</Link></li>
+              <li><Link to="/shipping" style={{ color: 'rgba(255,255,255,0.7)' }}>Shipping Policy</Link></li>
             </ul>
           </div>
 

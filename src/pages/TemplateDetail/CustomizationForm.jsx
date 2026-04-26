@@ -100,18 +100,24 @@ const CustomizationForm = () => {
       return;
     }
 
+    const phoneRegex = /^[0-9]{10}$/;
     if (!formData.fullName.trim()) {
       toast.error('Please enter your Full Name');
       return;
     }
-    if (!formData.whatsapp.trim()) {
-      toast.error('Please enter your WhatsApp Number');
+    if (!phoneRegex.test(formData.whatsapp.trim())) {
+      toast.error('Please enter a valid 10-digit WhatsApp number');
       return;
     }
-    if (!formData.address.trim()) {
-      toast.error('Please enter your Delivery Address');
+    
+    const addr = formData.address.toLowerCase();
+    const hasPincode = /[0-9]{6}/.test(addr);
+    
+    if (!formData.address.trim() || !hasPincode || addr.length < 15) {
+      toast.error('Please provide a complete address (including City, State, and 6-digit Pincode)');
       return;
     }
+
     if (!coverPhoto) {
       toast.error('Please upload a cover photo');
       return;
@@ -171,17 +177,32 @@ const CustomizationForm = () => {
           <div className="responsive-grid">
             <div className="input-group">
               <label className="input-label">Full Name</label>
-              <input type="text" name="fullName" className="input-field" onChange={handleInputChange} />
+              <input type="text" name="fullName" className="input-field" onChange={handleInputChange} placeholder="e.g. John Doe" />
             </div>
             <div className="input-group">
               <label className="input-label">WhatsApp Number</label>
-              <input type="tel" name="whatsapp" className="input-field" onChange={handleInputChange} />
+              <input 
+                type="tel" 
+                name="whatsapp" 
+                className="input-field" 
+                onChange={handleInputChange} 
+                placeholder="10-digit number"
+                maxLength="10"
+              />
+              <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '0.3rem', display: 'block' }}>Enter exactly 10 digits without +91 or spaces.</span>
             </div>
           </div>
 
           <div className="input-group">
             <label className="input-label">Delivery Address</label>
-            <textarea name="address" className="input-field" rows="3" onChange={handleInputChange}></textarea>
+            <textarea 
+              name="address" 
+              className="input-field" 
+              rows="3" 
+              onChange={handleInputChange} 
+              placeholder="House No, Street, City, State, Pincode"
+            ></textarea>
+            <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '0.3rem', display: 'block' }}>Must include City, State, and 6-digit Pincode.</span>
           </div>
 
           <div style={{ margin: '2rem 0' }}>

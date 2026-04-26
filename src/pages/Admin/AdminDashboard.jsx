@@ -91,7 +91,14 @@ const AdminDashboard = () => {
                       <select 
                         value={order.order_status} 
                         onChange={(e) => updateStatus(order.id, e.target.value)}
-                        style={{ padding: '0.4rem', borderRadius: '4px', border: '1px solid var(--border)', fontSize: '0.8rem' }}
+                        style={{ 
+                          padding: '0.4rem 0.8rem', 
+                          borderRadius: 'var(--radius)', 
+                          border: '1px solid var(--border)', 
+                          fontSize: '0.8rem',
+                          backgroundColor: 'var(--primary-light)',
+                          color: 'var(--text)'
+                        }}
                       >
                         <option value="received">Received</option>
                         <option value="printing">Printing</option>
@@ -100,23 +107,23 @@ const AdminDashboard = () => {
                       </select>
                     </td>
                   </tr>
-                  <tr style={{ borderBottom: '1px solid var(--border)', backgroundColor: '#fafafa' }}>
-                    <td colSpan="5" style={{ padding: '0.8rem 1rem', fontSize: '0.85rem' }}>
+                  <tr style={{ borderBottom: '1px solid var(--border)', backgroundColor: 'rgba(255, 255, 255, 0.03)' }}>
+                    <td colSpan="5" style={{ padding: '1rem', fontSize: '0.85rem' }}>
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
                         <div>
-                          <strong style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', display: 'block' }}>Delivery Address</strong>
-                          {order.customer_details.address}
+                          <strong style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--accent)', display: 'block', marginBottom: '0.5rem' }}>Delivery Address</strong>
+                          <span style={{ opacity: 0.9 }}>{order.customer_details.address}</span>
                         </div>
                         {order.customer_details.customText && (
                           <div>
-                            <strong style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', display: 'block' }}>Custom Content</strong>
-                            {order.customer_details.customText}
+                            <strong style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--accent)', display: 'block', marginBottom: '0.5rem' }}>Custom Content</strong>
+                            <span style={{ opacity: 0.9 }}>{order.customer_details.customText}</span>
                           </div>
                         )}
                         {order.customer_details.specialNotes && (
                           <div>
-                            <strong style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', display: 'block' }}>Special Instructions</strong>
-                            {order.customer_details.specialNotes}
+                            <strong style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--accent)', display: 'block', marginBottom: '0.5rem' }}>Special Instructions</strong>
+                            <span style={{ opacity: 0.9 }}>{order.customer_details.specialNotes}</span>
                           </div>
                         )}
                       </div>

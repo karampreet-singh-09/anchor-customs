@@ -21,30 +21,38 @@ const Home = () => {
   return (
     <div className="home-page">
       {/* Hero Section */}
-      <section style={{ 
-        height: '95vh', 
+      <section className="starred-bg" style={{ 
+        minHeight: '85vh', 
         display: 'flex', 
         alignItems: 'center', 
         backgroundColor: 'var(--bg)',
         overflow: 'hidden',
-        position: 'relative'
+        position: 'relative',
+        padding: '4rem 0'
       }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', alignItems: 'center', gap: '4rem' }}>
+        <div className="container hero-grid" style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+          alignItems: 'center', 
+          gap: '4rem',
+          textAlign: 'center' 
+        }}>
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
+            className="hero-text"
           >
             <span style={{ color: 'var(--accent)', fontWeight: '600', letterSpacing: '4px', textTransform: 'uppercase', fontSize: '0.8rem' }}>Establish 2024</span>
-            <h1 style={{ fontSize: '4.5rem', margin: '1rem 0', lineHeight: 1.05, fontWeight: 900 }}>Your Life, <br /> Curated as <span style={{ color: 'var(--accent)', fontStyle: 'italic' }}>Art.</span></h1>
-            <p style={{ fontSize: '1.25rem', color: 'var(--text-muted)', marginBottom: '3rem', maxWidth: '520px', lineHeight: 1.7 }}>
+            <h1 className="hero-title">Your Life, <br /> Curated as <span style={{ color: 'var(--accent)', fontStyle: 'italic' }}>Art.</span></h1>
+            <p className="hero-desc">
               Transform your digital moments into a professionally bound, luxury photo magazine. A timeless gift for those who matter most. 
             </p>
-            <div style={{ display: 'flex', gap: '1.5rem' }}>
-              <button onClick={scrollToCollection} className="btn btn-primary" style={{ padding: '1.2rem 3rem', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <button onClick={scrollToCollection} className="btn btn-primary hero-btn">
                 View Collection <ArrowDown size={18} />
               </button>
-              <Link to="/contact" className="btn btn-outline" style={{ padding: '1.2rem 3rem', fontSize: '1rem' }}>The Craft</Link>
+              <Link to="/contact" className="btn btn-outline hero-btn">The Craft</Link>
             </div>
           </motion.div>
 
@@ -52,17 +60,40 @@ const Home = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2 }}
-            style={{ position: 'relative' }}
+            style={{ display: 'flex', justifyContent: 'center' }}
           >
-            <div style={{ 
-              width: '100%', 
-              aspectRatio: '3/4', 
-              borderRadius: '2px',
-              boxShadow: '40px 40px 80px rgba(26, 34, 56, 0.15)',
-              border: '10px solid white',
-              background: 'url("https://images.unsplash.com/photo-1544144433-d50aff500b91?auto=format&fit=crop&q=80&w=1000") center/cover'
-            }}></div>
+            <div className="hero-image-container" aria-label="Luxury Custom Photo Magazine Preview"></div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Trust Bar - SEO & Conversion Booster */}
+      <section style={{ backgroundColor: '#080c14', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '2rem 0' }}>
+        <div className="container">
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', 
+            gap: '2rem',
+            textAlign: 'center',
+            alignItems: 'center'
+          }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <span style={{ color: 'var(--accent)', fontSize: '1.5rem', fontWeight: 'bold' }}>500+</span>
+              <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.7 }}>Happy Customers</span>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <span style={{ color: 'var(--accent)', fontSize: '1.5rem', fontWeight: 'bold' }}>100% Secure</span>
+              <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.7 }}>Razorpay Protected</span>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <span style={{ color: 'var(--accent)', fontSize: '1.5rem', fontWeight: 'bold' }}>Artisanal</span>
+              <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.7 }}>Quality Guaranteed</span>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <span style={{ color: 'var(--accent)', fontSize: '1.5rem', fontWeight: 'bold' }}>Worldwide</span>
+              <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.7 }}>Tracked Shipping</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -163,7 +194,8 @@ const Home = () => {
                 style={{ 
                   textAlign: 'center', 
                   padding: '3rem 2rem', 
-                  backgroundColor: 'white', 
+                  backgroundColor: 'var(--glass)', 
+                  backdropFilter: 'blur(10px)',
                   border: '1px solid var(--border)', 
                   borderRadius: 'var(--radius)' 
                 }}
