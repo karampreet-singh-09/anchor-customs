@@ -52,12 +52,26 @@ const AdminDashboard = () => {
   return (
     <div className="section-padding">
       <div className="container">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem' }}>
-          <div>
-            <h1 style={{ fontSize: '2.5rem' }}>Admin Control</h1>
-            <p style={{ color: 'var(--text-muted)' }}>Manage incoming magazine orders</p>
-          </div>
+        <div className="admin-header" style={{ marginBottom: '2rem' }}>
+          <h1 className="admin-title">Admin Control</h1>
+          <p style={{ color: 'var(--text-muted)' }}>Manage incoming magazine orders</p>
         </div>
+
+        <style>{`
+          .admin-title {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+          }
+          @media (max-width: 768px) {
+            .admin-title {
+              font-size: 2rem;
+            }
+            .admin-header {
+              text-align: center;
+              margin-bottom: 2rem;
+            }
+          }
+        `}</style>
 
         <div className="card" style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
