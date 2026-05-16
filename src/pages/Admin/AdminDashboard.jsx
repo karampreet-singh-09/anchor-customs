@@ -126,6 +126,18 @@ const AdminDashboard = () => {
                             <span style={{ opacity: 0.9 }}>{order.customer_details.specialNotes}</span>
                           </div>
                         )}
+                        <div>
+                          <strong style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--accent)', display: 'block', marginBottom: '0.5rem' }}>Storage Folder</strong>
+                          <code style={{ 
+                            backgroundColor: 'rgba(255,255,255,0.1)', 
+                            padding: '0.3rem 0.6rem', 
+                            borderRadius: '4px',
+                            fontSize: '0.8rem',
+                            display: 'inline-block'
+                          }}>
+                            {order.images?.[0]?.split('/photos/')?.[1]?.split('/')?.[0] || 'N/A'}
+                          </code>
+                        </div>
                       </div>
                     </td>
                   </tr>
