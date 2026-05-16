@@ -6,21 +6,22 @@ A full-stack React application for a custom photo magazine business.
 - **Modern UI**: Premium design with Playfair Display and Inter typography.
 - **Customization Flow**: Step-by-step selection of templates and page counts (10/12 pages).
 - **Multi-Image Upload**: Drag-and-drop up to 50 photos with upload progress.
-- **Firebase Backend**: 
-  - Authentication (Email/Password)
-  - Firestore (Orders, User Data)
-  - Storage (Photo Uploads)
+- **Supabase Backend**: 
+  - Authentication (Email/Password with Password Reset)
+  - Database (Orders, User Profiles)
+  - Edge Functions (Payment Verification)
+  - Storage (Customer Photos)
 - **Razorpay Integration**: Seamless payment for Indian customers.
-- **User Dashboard**: Order history and status tracking.
-- **Admin Dashboard**: View all orders, update status, and export to CSV.
+- **User Dashboard**: Order history and status tracking with personalized greetings.
+- **Admin Dashboard**: Secure access to view all orders, manage status, and download photos.
 
 ## Getting Started
 
 1. **Clone the repo** and run `npm install`.
-2. **Setup Firebase**:
-   - Create a project on [Firebase Console](https://console.firebase.google.com/).
+2. **Setup Supabase**:
+   - Create a project on [Supabase Console](https://supabase.com/).
    - Enable Authentication (Email/Password).
-   - Create a Firestore Database and a Storage bucket.
+   - Create an `orders` table and a `photos` storage bucket.
    - Copy your config to `.env` (use `.env.example` as a template).
 3. **Setup Razorpay**:
    - Get your Test/Live Key ID from [Razorpay Dashboard](https://dashboard.razorpay.com/).
