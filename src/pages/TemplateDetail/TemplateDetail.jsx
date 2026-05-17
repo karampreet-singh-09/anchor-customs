@@ -451,7 +451,23 @@ const TemplateDetail = () => {
         {/* Detailed Product Information */}
         {template.details && (
           <div style={{ marginTop: '4rem', textAlign: 'left', background: 'var(--bg-offset)', padding: isMobile ? '1.5rem' : '3rem', borderRadius: '16px', border: '1px solid var(--border)' }}>
-            <h3 style={{ fontSize: '1.8rem', marginBottom: '1.5rem', fontFamily: 'var(--font-serif)', color: 'var(--navy)' }}>About This Product</h3>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', marginBottom: '1.5rem', gap: '0.5rem' }}>
+              <h3 style={{ fontSize: '1.8rem', fontFamily: 'var(--font-serif)', color: 'var(--navy)', margin: 0 }}>About This Product</h3>
+              {isMobile && (
+                <span style={{ 
+                  display: 'inline-flex', 
+                  alignItems: 'center', 
+                  gap: '0.3rem', 
+                  color: 'var(--accent)', 
+                  fontSize: '0.8rem', 
+                  fontWeight: 'bold',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px'
+                }}>
+                  Swipe left <span style={{ display: 'inline-flex', animation: 'swipePulse 1.5s infinite' }}><ArrowRight size={14} style={{ marginLeft: '2px' }} /></span>
+                </span>
+              )}
+            </div>
             
             <p style={{ color: 'var(--text-muted)', lineHeight: '1.5', marginBottom: '2rem', whiteSpace: 'pre-wrap', fontSize: '0.95rem' }}>
               {template.details.intro}
