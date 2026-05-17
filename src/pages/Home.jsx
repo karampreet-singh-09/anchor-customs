@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import { Camera, Heart, Truck, CheckCircle, ArrowDown, Star, User, ArrowLeft } from 'lucide-react';
+import { Camera, Heart, Truck, CheckCircle, ArrowDown, Star, User, ArrowLeft, ArrowRight } from 'lucide-react';
 import { TEMPLATES } from '../utils/data';
 
 const ProductCardContent = ({ template }) => (
@@ -321,9 +321,26 @@ const Home = () => {
       {/* Features Section */}
       <section className="section-padding" style={{ backgroundColor: 'var(--bg-offset)' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '6rem' }}>
-            <h2 style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>How It Works</h2>
-            <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>Simple steps to create your personalized gift.</p>
+          <div style={{ textAlign: 'center', marginBottom: isMobile ? '2.5rem' : '6rem' }}>
+            <h2 style={{ fontSize: isMobile ? '2rem' : '3rem', marginBottom: '1rem' }}>How It Works</h2>
+            <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem', margin: 0 }}>
+              <span>Simple steps to create your personalized gift.</span>
+              {isMobile && (
+                <span style={{ 
+                  display: 'inline-flex', 
+                  alignItems: 'center', 
+                  gap: '0.3rem', 
+                  color: 'var(--accent)', 
+                  fontSize: '0.85rem', 
+                  fontWeight: 'bold',
+                  marginTop: '0.4rem',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px'
+                }}>
+                  Swipe left to view <span style={{ display: 'inline-flex', animation: 'swipePulse 1.5s infinite' }}><ArrowRight size={14} style={{ marginLeft: '2px' }} /></span>
+                </span>
+              )}
+            </p>
           </div>
 
           <div className="how-it-works-grid" style={{ 
