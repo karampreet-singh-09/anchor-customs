@@ -101,8 +101,8 @@ const TemplateDetail = () => {
   };
 
   // Dynamically configure book dimensions & aspect ratios to eliminate margins
-  let bookWidth = isMobile ? 330 : 280;
-  let bookHeight = isMobile ? 450 : 380;
+  let bookWidth = isMobile ? 370 : 280;
+  let bookHeight = isMobile ? 500 : 380;
   let wrapperAspectRatio = isMobile ? '0.73' : '1.47';
   let wrapperMaxWidth = isMobile ? '100%' : '800px';
 
@@ -112,8 +112,8 @@ const TemplateDetail = () => {
     wrapperAspectRatio = '1.5';
     wrapperMaxWidth = '600px';
   } else if (template.category === 'Scrapbook') {
-    bookWidth = isMobile ? 420 : 380;
-    bookHeight = isMobile ? 300 : 280;
+    bookWidth = isMobile ? 440 : 380;
+    bookHeight = isMobile ? 320 : 280;
     wrapperAspectRatio = isMobile ? '1.36' : '2.71';
     wrapperMaxWidth = '100%';
   }
@@ -292,8 +292,8 @@ const TemplateDetail = () => {
                           overflow: 'hidden', 
                           cursor: 'zoom-in',
                           position: 'relative',
-                          borderLeft: (!isMobile && template.category !== 'Scrapbook' && template.category !== 'Calendar' && idx % 2 !== 0) ? '1px solid #eee' : 'none', 
-                          borderRight: (!isMobile && template.category !== 'Scrapbook' && template.category !== 'Calendar' && idx % 2 === 0) ? '1px solid #eee' : 'none'
+                          borderLeft: !isMobile && idx % 2 !== 0 ? '1px solid #eee' : 'none', 
+                          borderRight: !isMobile && idx % 2 === 0 ? '1px solid #eee' : 'none'
                         }}
                         onClick={() => setSelectedImage(pageImg)}
                         onTouchStart={(e) => handlePageGesture(e, pageImg)}
