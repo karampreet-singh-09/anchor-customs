@@ -18,6 +18,37 @@ const TemplateDetail = () => {
   const isComboOrHamper = template && (template.category === 'Hamper' || template.category === 'Combo' || template.category === 'Combos');
   const [activeTab, setActiveTab] = useState(isComboOrHamper ? 'gallery' : 'book');
 
+  const lastTapRef = useRef(0);
+  const longPressTimeoutRef = useRef(null);
+
+  // Handle double tap or long press zoom
+  const handlePageGesture = (e, imgUrl) => {
+    if (e.touches && e.touches.length > 0) {
+      const currentTime = new Date().getTime();
+      const tapLength = currentTime - lastTapRef.current;
+      
+      // Double tap (within 300ms)
+      if (tapLength < 300 && tapLength > 0) {
+        setSelectedImage(imgUrl);
+        e.preventDefault();
+        return;
+      }
+      lastTapRef.current = currentTime;
+
+      // Long press (after 500ms)
+      if (longPressTimeoutRef.current) clearTimeout(longPressTimeoutRef.current);
+      longPressTimeoutRef.current = setTimeout(() => {
+        setSelectedImage(imgUrl);
+      }, 500);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (longPressTimeoutRef.current) {
+      clearTimeout(longPressTimeoutRef.current);
+    }
+  };
+
   React.useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -70,10 +101,10 @@ const TemplateDetail = () => {
   };
 
   // Dynamically configure book dimensions & aspect ratios to eliminate margins
-  let bookWidth = 280;
-  let bookHeight = 380;
+  let bookWidth = isMobile ? 330 : 280;
+  let bookHeight = isMobile ? 450 : 380;
   let wrapperAspectRatio = isMobile ? '0.73' : '1.47';
-  let wrapperMaxWidth = isMobile ? '340px' : '800px';
+  let wrapperMaxWidth = isMobile ? '100%' : '800px';
 
   if (template.category === 'Calendar') {
     bookWidth = 280;
@@ -81,10 +112,10 @@ const TemplateDetail = () => {
     wrapperAspectRatio = '1.5';
     wrapperMaxWidth = '600px';
   } else if (template.category === 'Scrapbook') {
-    bookWidth = 380;
-    bookHeight = 280;
+    bookWidth = isMobile ? 420 : 380;
+    bookHeight = isMobile ? 300 : 280;
     wrapperAspectRatio = isMobile ? '1.36' : '2.71';
-    wrapperMaxWidth = isMobile ? '450px' : '90%';
+    wrapperMaxWidth = '100%';
   }
 
   return (
@@ -96,7 +127,7 @@ const TemplateDetail = () => {
             display: 'inline-flex', 
             alignItems: 'center', 
             gap: '0.5rem', 
-            marginTop: '-4rem',
+            marginTop: isMobile ? '-1.5rem' : '-4rem',
             marginBottom: '2.5rem', 
             fontSize: '1rem', 
             border: 'none', 
@@ -196,8 +227,8 @@ const TemplateDetail = () => {
                   width: '100%', 
                   maxWidth: wrapperMaxWidth, 
                   aspectRatio: wrapperAspectRatio,
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.15)', 
-                  borderRadius: '4px',
+                  boxShadow: isMobile ? 'none' : '0 10px 30px rgba(0,0,0,0.15)', 
+                  borderRadius: isMobile ? '0' : '4px',
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
@@ -215,7 +246,7 @@ const TemplateDetail = () => {
                     minHeight={200}
                     maxHeight={800}
                     maxShadowOpacity={0.5}
-                    showCover={true}
+                    showCover={!isMobile}
                     usePortrait={isMobile || template.category === 'Calendar'}
                     mobileScrollSupport={true}
                     className="magazine-flipbook"
@@ -230,6 +261,8 @@ const TemplateDetail = () => {
                         position: 'relative'
                       }}
                       onClick={() => setSelectedImage(template.pages[0])}
+                      onTouchStart={(e) => handlePageGesture(e, template.pages[0])}
+                      onTouchEnd={handleTouchEnd}
                     >
                       <div style={{ position: 'absolute', inset: 0, background: template.category === 'Calendar' ? 'linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, transparent 15%)' : 'linear-gradient(to right, rgba(0,0,0,0.3) 0%, rgba(255,255,255,0.2) 3%, transparent 10%)', zIndex: 10, pointerEvents: 'none' }}></div>
                       <img 
@@ -259,10 +292,12 @@ const TemplateDetail = () => {
                           overflow: 'hidden', 
                           cursor: 'zoom-in',
                           position: 'relative',
-                          borderLeft: (template.category !== 'Calendar' && idx % 2 !== 0) ? '1px solid #eee' : 'none', 
-                          borderRight: (template.category !== 'Calendar' && idx % 2 === 0) ? '1px solid #eee' : 'none'
+                          borderLeft: (!isMobile && template.category !== 'Scrapbook' && template.category !== 'Calendar' && idx % 2 !== 0) ? '1px solid #eee' : 'none', 
+                          borderRight: (!isMobile && template.category !== 'Scrapbook' && template.category !== 'Calendar' && idx % 2 === 0) ? '1px solid #eee' : 'none'
                         }}
                         onClick={() => setSelectedImage(pageImg)}
+                        onTouchStart={(e) => handlePageGesture(e, pageImg)}
+                        onTouchEnd={handleTouchEnd}
                       >
                         <div style={{ position: 'absolute', inset: 0, background: template.category === 'Calendar' ? 'linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, transparent 15%)' : (idx % 2 !== 0 ? 'linear-gradient(to right, rgba(0,0,0,0.1) 0%, transparent 10%)' : 'linear-gradient(to left, rgba(0,0,0,0.1) 0%, transparent 10%)'), zIndex: 10, pointerEvents: 'none' }}></div>
                         <img 
@@ -415,16 +450,25 @@ const TemplateDetail = () => {
 
         {/* Detailed Product Information */}
         {template.details && (
-          <div style={{ marginTop: '4rem', textAlign: 'left', background: 'var(--bg-offset)', padding: '3rem', borderRadius: '16px', border: '1px solid var(--border)' }}>
+          <div style={{ marginTop: '4rem', textAlign: 'left', background: 'var(--bg-offset)', padding: isMobile ? '1.5rem' : '3rem', borderRadius: '16px', border: '1px solid var(--border)' }}>
             <h3 style={{ fontSize: '1.8rem', marginBottom: '1.5rem', fontFamily: 'var(--font-serif)', color: 'var(--navy)' }}>About This Product</h3>
             
             <p style={{ color: 'var(--text-muted)', lineHeight: '1.5', marginBottom: '2rem', whiteSpace: 'pre-wrap', fontSize: '0.95rem' }}>
               {template.details.intro}
             </p>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '3rem' }}>
+            <div style={{ 
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: isMobile ? 'nowrap' : 'wrap',
+              overflowX: isMobile ? 'auto' : 'visible',
+              gap: isMobile ? '1.5rem' : '3rem',
+              width: '100%',
+              scrollbarWidth: 'none',
+              paddingBottom: isMobile ? '1rem' : '0'
+            }}>
               {template.details.included && (
-                <div>
+                <div style={{ flex: isMobile ? '0 0 240px' : '1 1 250px', maxWidth: isMobile ? '240px' : 'none' }}>
                   <h4 style={{ fontSize: '1.1rem', marginBottom: '0.8rem', color: 'var(--accent)' }}>What's Included:</h4>
                   <ul style={{ listStyle: 'none', padding: 0 }}>
                     {template.details.included.map((item, i) => (
@@ -437,7 +481,7 @@ const TemplateDetail = () => {
               )}
 
               {template.details.required && (
-                <div>
+                <div style={{ flex: isMobile ? '0 0 240px' : '1 1 250px', maxWidth: isMobile ? '240px' : 'none' }}>
                   <h4 style={{ fontSize: '1.1rem', marginBottom: '0.8rem', color: 'var(--accent)' }}>Things Required:</h4>
                   <ul style={{ listStyle: 'none', padding: 0 }}>
                     {template.details.required.map((item, i) => (
@@ -450,7 +494,7 @@ const TemplateDetail = () => {
               )}
 
               {template.details.perfectFor && (
-                <div>
+                <div style={{ flex: isMobile ? '0 0 240px' : '1 1 250px', maxWidth: isMobile ? '240px' : 'none' }}>
                   <h4 style={{ fontSize: '1.1rem', marginBottom: '0.8rem', color: 'var(--accent)' }}>Perfect For:</h4>
                   <ul style={{ listStyle: 'none', padding: 0 }}>
                     {template.details.perfectFor.map((item, i) => (
@@ -463,7 +507,7 @@ const TemplateDetail = () => {
               )}
 
               {template.details.importantInfo && (
-                <div>
+                <div style={{ flex: isMobile ? '0 0 240px' : '1 1 250px', maxWidth: isMobile ? '240px' : 'none' }}>
                   <h4 style={{ fontSize: '1.1rem', marginBottom: '0.8rem', color: 'var(--accent)' }}>Important Information:</h4>
                   <ul style={{ listStyle: 'none', padding: 0 }}>
                     {template.details.importantInfo.map((item, i) => (

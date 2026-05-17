@@ -62,6 +62,15 @@ const Home = () => {
   const collectionRef = useRef(null);
   const location = useLocation();
   const [selectedCategory, setSelectedCategory] = React.useState(null);
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   React.useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -91,14 +100,14 @@ const Home = () => {
     <div className="home-page">
       {/* Hero Section */}
         <section className="starred-bg" style={{ 
-          minHeight: '80vh',
+          minHeight: isMobile ? '50vh' : '80vh',
           display: 'flex', 
           alignItems: 'center', 
           justifyContent: 'center',
           backgroundColor: 'var(--bg)',
           overflow: 'hidden',
           position: 'relative',
-          padding: '8rem 0 4rem'
+          padding: isMobile ? '4rem 0 2rem' : '8rem 0 4rem'
         }}>
         <div className="container hero-grid" style={{ 
           display: 'flex', 
