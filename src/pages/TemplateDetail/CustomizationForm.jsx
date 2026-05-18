@@ -138,22 +138,15 @@ const CustomizationForm = () => {
         let completed = 0;
         const photoUrls = [];
         
-        // Process in safe batches of 5 to prevent Supabase rate limiting and network drops
-        const BATCH_SIZE = 5;
-        for (let i = 0; i < photos.length; i += BATCH_SIZE) {
-          const batch = photos.slice(i, i + BATCH_SIZE);
+        // Process purely sequentially (1 by 1) to prevent "failed to fetch" network bandwidth saturation
+        for (let i = 0; i < photos.length; i++) {
+          const url = await uploadFile(photos[i].file, 'photos', 'inner', formData, folderPath);
+          photoUrls.push(url);
+          completed++;
           
-          const batchPromises = batch.map(async (photo) => {
-            const url = await uploadFile(photo.file, 'photos', 'inner', formData, folderPath);
-            completed++;
-            // Update progress per photo completed within the batch
-            const realProgress = 30 + (completed / photos.length * 60);
-            setUploadProgress(prev => Math.max(prev, realProgress));
-            return url;
-          });
-          
-          const batchResults = await Promise.all(batchPromises);
-          photoUrls.push(...batchResults);
+          // Update progress
+          const realProgress = 30 + (completed / photos.length * 60);
+          setUploadProgress(prev => Math.max(prev, realProgress));
         }
         finalImages = [coverUrl, ...photoUrls];
         clearInterval(progressInterval);
