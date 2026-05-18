@@ -134,18 +134,18 @@ const CustomizationForm = () => {
         const coverUrl = await uploadFile(coverPhoto, 'photos', 'cover', formData, folderPath);
         
         let completed = 0;
-        const uploadPromises = photos.map((photo, i) => 
-          uploadFile(photo.file, 'photos', 'inner', formData, folderPath)
-            .then(url => {
-              completed++;
-              // Jump progress based on real completion
-              const realProgress = 30 + (completed / photos.length * 60);
-              setUploadProgress(prev => Math.max(prev, realProgress));
-              return url;
-            })
-        );
+        const photoUrls = [];
         
-        const photoUrls = await Promise.all(uploadPromises);
+        // Process sequentially to avoid browser crash / network timeout with 50+ photos
+        for (let i = 0; i < photos.length; i++) {
+          const url = await uploadFile(photos[i].file, 'photos', 'inner', formData, folderPath);
+          photoUrls.push(url);
+          completed++;
+          
+          // Jump progress based on real completion
+          const realProgress = 30 + (completed / photos.length * 60);
+          setUploadProgress(prev => Math.max(prev, realProgress));
+        }
         finalImages = [coverUrl, ...photoUrls];
         clearInterval(progressInterval);
         setUploadProgress(100);
