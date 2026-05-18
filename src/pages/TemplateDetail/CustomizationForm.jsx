@@ -138,8 +138,8 @@ const CustomizationForm = () => {
         let completed = 0;
         const photoUrls = [];
         
-        // Process in large batches of 25 for absolute maximum speed
-        const BATCH_SIZE = 25;
+        // Process in safe batches of 5 to prevent Supabase rate limiting and network drops
+        const BATCH_SIZE = 5;
         for (let i = 0; i < photos.length; i += BATCH_SIZE) {
           const batch = photos.slice(i, i + BATCH_SIZE);
           
