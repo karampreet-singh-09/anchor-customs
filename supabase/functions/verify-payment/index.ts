@@ -36,7 +36,7 @@ serve(async (req) => {
     )
 
     // 3. Update order status to 'paid'
-    const { error } = await supabase
+    const { data: order, error } = await supabase
       .from('orders')
       .update({ 
         status: 'paid',
@@ -44,8 +44,58 @@ serve(async (req) => {
         updated_at: new Date().toISOString()
       })
       .eq('id', order_id)
+      .select('customer_details, items')
+      .single()
 
     if (error) throw error
+
+    // 4. Send WhatsApp Confirmation Message
+    try {
+      if (order && order.customer_details && order.customer_details.whatsapp) {
+        const phone = order.customer_details.whatsapp;
+        const name = order.customer_details.name || 'Customer';
+        
+        // Example integration for Interakt WhatsApp API
+        // Ensure you add INTERAKT_API_KEY to your Supabase Edge Function Secrets
+        const interaktKey = Deno.env.get('INTERAKT_API_KEY');
+        
+        if (interaktKey) {
+          const whatsappPayload = {
+            countryCode: "+91",
+            phoneNumber: phone.replace('+91', '').trim(),
+            callbackData: "order_confirmation",
+            type: "Template",
+            template: {
+              name: "order_confirmation", // Replace with your approved template name
+              languageCode: "en",
+              bodyValues: [
+                name,
+                order_id
+              ]
+            }
+          };
+
+          const waResponse = await fetch('https://api.interakt.ai/v1/public/message/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Basic ${interaktKey}`
+            },
+            body: JSON.stringify(whatsappPayload)
+          });
+          
+          if (!waResponse.ok) {
+            console.error("WhatsApp API Error:", await waResponse.text());
+          } else {
+            console.log("✓ WhatsApp confirmation sent to", phone);
+          }
+        } else {
+          console.log("⚠️ INTERAKT_API_KEY not set. Skipping WhatsApp message.");
+        }
+      }
+    } catch (waError) {
+      console.error("Failed to send WhatsApp message:", waError.message);
+    }
 
     return new Response(JSON.stringify({ success: true }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },

@@ -407,6 +407,7 @@ export const TEMPLATES = [
     imageFit: 'contain',
     pageBg: '#fdfdfd',
     gallery: [
+      '/products/HAMPER/ultimate_hamper.mp4',
       '/products/HAMPER/1.jpg',
       '/products/HAMPER/2.jpg',
       '/products/HAMPER/a4 frames website hamper.jpg',

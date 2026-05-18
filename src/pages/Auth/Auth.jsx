@@ -5,13 +5,9 @@ import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
 
 const Auth = () => {
-  const { demoLogin, signInWithPhone, verifyOtp } = useAuth();
+  const { demoLogin, signInWithGoogle } = useAuth();
   const location = useLocation();
-  const [phone, setPhone] = useState('');
-  const [otp, setOtp] = useState('');
-  const [step, setStep] = useState('phone'); // 'phone' or 'otp'
   const [loading, setLoading] = useState(false);
-  const [timer, setTimer] = useState(0);
   const navigate = useNavigate();
 
   const handleDemoLogin = () => {
@@ -20,215 +16,167 @@ const Auth = () => {
     navigate(from);
   };
 
-  // Handle timer for resend OTP
-  React.useEffect(() => {
-    let interval = null;
-    if (timer > 0) {
-      interval = setInterval(() => {
-        setTimer((prev) => prev - 1);
-      }, 1000);
-    } else {
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-  }, [timer]);
-
-  const handleSendOtp = async (e) => {
-    if (e) e.preventDefault();
-    if (!phone || phone.length < 10) {
-      toast.error('Please enter a valid phone number');
-      return;
-    }
-
+  const handleGoogleLogin = async () => {
     setLoading(true);
-    const formattedPhone = phone.startsWith('+') ? phone : `+91${phone}`;
-    
     try {
-      const { data, error } = await signInWithPhone(formattedPhone);
-      
-      if (error) throw error;
-      if (data?.type === 'error') throw new Error(data.message || 'Failed to send OTP');
-      
-      setStep('otp');
-      setTimer(60);
-      toast.success('OTP sent successfully!');
+      await signInWithGoogle();
+      // Supabase will redirect — no navigation needed here
     } catch (error) {
-      toast.error(error.message || 'Failed to send OTP. Check your Msg91 configuration.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleVerifyOtp = async (e) => {
-    e.preventDefault();
-    if (!otp || otp.length < 6) {
-      toast.error('Please enter the 6-digit OTP');
-      return;
-    }
-
-    setLoading(true);
-    const formattedPhone = phone.startsWith('+') ? phone : `+91${phone}`;
-
-    try {
-      const { error } = await verifyOtp(formattedPhone, otp);
-      
-      if (error) throw error;
-
-      toast.success('Logged in successfully!');
-      const from = location.state?.from || '/';
-      navigate(from);
-    } catch (error) {
-      toast.error(error.message || 'Invalid or expired OTP');
-    } finally {
+      toast.error(error.message || 'Google sign-in failed. Please try again.');
       setLoading(false);
     }
   };
 
   return (
-    <div className="section-padding" style={{ 
-      background: 'linear-gradient(135deg, var(--bg) 0%, var(--bg-offset) 100%)', 
-      minHeight: '90vh', 
-      display: 'flex', 
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
+    <div
+      className="section-padding"
+      style={{
+        background: 'linear-gradient(135deg, var(--bg) 0%, var(--bg-offset) 100%)',
+        minHeight: '90vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        className="container" 
-        style={{ maxWidth: '450px' }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+        className="container"
+        style={{ maxWidth: '440px', width: '100%' }}
       >
-        <div className="card" style={{ 
-          padding: '3rem 2rem', 
-          boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
-          border: '1px solid rgba(255,255,255,0.1)',
-          backdropFilter: 'blur(20px)',
-          background: 'rgba(255, 255, 255, 0.8)'
-        }}>
+        <div
+          className="card"
+          style={{
+            padding: '3rem 2.5rem',
+            boxShadow: '0 24px 60px rgba(0,0,0,0.12)',
+            border: '1px solid rgba(255,255,255,0.15)',
+            backdropFilter: 'blur(20px)',
+            background: 'rgba(255, 255, 255, 0.85)',
+            borderRadius: '1.25rem',
+          }}
+        >
+          {/* Logo / Brand */}
           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-            <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '2.4rem', color: 'var(--navy)', marginBottom: '0.5rem' }}>
-              Welcome <span style={{ color: 'var(--accent)' }}>Back</span>
-            </h1>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>
-              {step === 'phone' ? 'Secure login via Phone OTP' : `Enter the 6-digit code sent to +91 ${phone}`}
-            </p>
-          </div>
-          
-          {step === 'phone' ? (
-            <form onSubmit={handleSendOtp} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <div className="input-group">
-                <label className="input-label" style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--navy)', textTransform: 'uppercase', letterSpacing: '1px' }}>Phone Number</label>
-                <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
-                  <div style={{ 
-                    padding: '0.8rem 1rem', 
-                    border: '1px solid var(--border)', 
-                    borderRadius: 'var(--radius)', 
-                    backgroundColor: 'var(--bg-offset)', 
-                    color: 'var(--navy)', 
-                    fontSize: '1rem',
-                    fontWeight: '600'
-                  }}>+91</div>
-                  <input 
-                    type="tel" 
-                    value={phone} 
-                    required 
-                    autoFocus
-                    className="input-field" 
-                    onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))} 
-                    placeholder="Enter 10 digits"
-                    maxLength="10"
-                    style={{ flex: 1, fontSize: '1.1rem', letterSpacing: '1px' }}
-                  />
-                </div>
-              </div>
-
-              <button 
-                type="submit" 
-                disabled={loading || phone.length < 10} 
-                className="btn btn-primary" 
-                style={{ 
-                  width: '100%', 
-                  padding: '1.2rem', 
-                  fontSize: '1.1rem', 
-                  marginTop: '1rem',
-                  boxShadow: 'var(--gold-glow)',
-                  opacity: (loading || phone.length < 10) ? 0.7 : 1
-                }}
-              >
-                {loading ? 'Processing...' : 'Send Verification Code'}
-              </button>
-            </form>
-          ) : (
-            <form onSubmit={handleVerifyOtp} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <div className="input-group">
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                  <label className="input-label" style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--navy)', textTransform: 'uppercase', letterSpacing: '1px', margin: 0 }}>Enter OTP</label>
-                  <button 
-                    type="button" 
-                    onClick={() => setStep('phone')}
-                    style={{ background: 'none', border: 'none', color: 'var(--accent)', fontSize: '0.75rem', fontWeight: 'bold', cursor: 'pointer', padding: 0 }}
-                  >
-                    Change Number
-                  </button>
-                </div>
-                <input 
-                  type="text" 
-                  value={otp} 
-                  required 
-                  autoFocus
-                  className="input-field" 
-                  onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))} 
-                  placeholder="• • • • • •"
-                  maxLength="6"
-                  style={{ textAlign: 'center', letterSpacing: '0.8rem', fontSize: '1.5rem', fontWeight: 'bold', height: '60px' }}
-                />
-              </div>
-
-              <button type="submit" disabled={loading || otp.length < 6} className="btn btn-primary" style={{ width: '100%', padding: '1.2rem', fontSize: '1.1rem', boxShadow: 'var(--gold-glow)' }}>
-                {loading ? 'Verifying...' : 'Complete Login'}
-              </button>
-
-              <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-                {timer > 0 ? (
-                  <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Resend code in <span style={{ fontWeight: 'bold', color: 'var(--navy)' }}>{timer}s</span></p>
-                ) : (
-                  <button 
-                    type="button" 
-                    onClick={handleSendOtp}
-                    style={{ background: 'none', border: 'none', color: 'var(--accent)', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer' }}
-                  >
-                    Didn't receive code? Resend
-                  </button>
-                )}
-              </div>
-            </form>
-          )}
-
-          <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
-            <button 
-              type="button" 
-              onClick={handleDemoLogin}
-              style={{ 
-                background: 'rgba(175, 145, 112, 0.1)', 
-                border: '1px dashed var(--accent)', 
-                color: 'var(--accent)', 
-                padding: '0.6rem 1rem', 
-                borderRadius: 'var(--radius)', 
-                fontSize: '0.8rem', 
-                fontWeight: '600', 
-                cursor: 'pointer',
-                width: '100%'
+            <div
+              style={{
+                width: '64px',
+                height: '64px',
+                borderRadius: '50%',
+                background: 'linear-gradient(135deg, var(--navy), var(--accent))',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 1.25rem',
+                boxShadow: 'var(--gold-glow)',
               }}
             >
-              Bypass Login (Developer Mode)
-            </button>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </div>
+            <h1
+              style={{
+                fontFamily: 'var(--font-serif)',
+                fontSize: '2.2rem',
+                color: 'var(--navy)',
+                marginBottom: '0.4rem',
+                lineHeight: 1.2,
+              }}
+            >
+              Welcome to <span style={{ color: 'var(--accent)' }}>Anchor</span>
+            </h1>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>
+              Sign in to browse &amp; place custom orders
+            </p>
           </div>
 
-          <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid var(--border)', textAlign: 'center' }}>
-             <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: '1.6' }}>
-                Secure authentication provided by Anchor Customs. <br/>
-                We respect your privacy.
-             </p>
+          {/* Google Sign-In Button */}
+          <motion.button
+            whileHover={{ scale: 1.02, boxShadow: '0 8px 24px rgba(0,0,0,0.15)' }}
+            whileTap={{ scale: 0.98 }}
+            onClick={handleGoogleLogin}
+            disabled={loading}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.75rem',
+              width: '100%',
+              padding: '0.95rem 1.5rem',
+              background: '#fff',
+              border: '1.5px solid #dadce0',
+              borderRadius: '0.75rem',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              fontSize: '1rem',
+              fontWeight: '600',
+              color: '#3c4043',
+              transition: 'all 0.2s ease',
+              opacity: loading ? 0.7 : 1,
+            }}
+          >
+            {/* Google "G" SVG icon */}
+            <svg width="20" height="20" viewBox="0 0 48 48" style={{ flexShrink: 0 }}>
+              <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+              <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+              <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+              <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+              <path fill="none" d="M0 0h48v48H0z"/>
+            </svg>
+            {loading ? 'Redirecting…' : 'Continue with Google'}
+          </motion.button>
+
+          {/* Divider */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '1rem',
+              margin: '1.75rem 0',
+            }}
+          >
+            <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
+              or
+            </span>
+            <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
+          </div>
+
+          {/* Demo / Developer bypass */}
+          <button
+            type="button"
+            onClick={handleDemoLogin}
+            style={{
+              background: 'rgba(175, 145, 112, 0.08)',
+              border: '1px dashed var(--accent)',
+              color: 'var(--accent)',
+              padding: '0.65rem 1rem',
+              borderRadius: 'var(--radius)',
+              fontSize: '0.8rem',
+              fontWeight: '600',
+              cursor: 'pointer',
+              width: '100%',
+              transition: 'background 0.2s',
+            }}
+          >
+            Bypass Login (Developer Mode)
+          </button>
+
+          {/* Footer */}
+          <div
+            style={{
+              marginTop: '2.5rem',
+              paddingTop: '1.5rem',
+              borderTop: '1px solid var(--border)',
+              textAlign: 'center',
+            }}
+          >
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', lineHeight: '1.6' }}>
+              Secure authentication powered by Google &amp; Supabase.
+              <br />
+              We never store your password.
+            </p>
           </div>
         </div>
       </motion.div>

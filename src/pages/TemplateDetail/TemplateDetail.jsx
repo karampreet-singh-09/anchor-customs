@@ -338,13 +338,32 @@ const TemplateDetail = () => {
             {(activeTab === 'gallery' || !template.pages || template.pages.length === 0) && (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '500px' }}>
                 <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.15)', background: '#fff' }}>
-                  <img 
-                    src={sliderImages[currentSlide]} 
-                    alt={`${template.name} view ${currentSlide + 1}`} 
-                    loading="lazy"
-                    onClick={() => setSelectedImage(sliderImages[currentSlide])}
-                    style={{ width: '100%', height: 'auto', display: 'block', objectFit: template.imageFit || 'cover', cursor: 'zoom-in' }} 
-                  />
+                  {sliderImages[currentSlide]?.endsWith('.mp4') ? (
+                    <video
+                      src={sliderImages[currentSlide]}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      controls
+                      style={{ 
+                        width: '100%', 
+                        height: 'auto', 
+                        display: 'block', 
+                        objectFit: template.imageFit || 'cover',
+                        maxHeight: '450px',
+                        background: '#000'
+                      }}
+                    />
+                  ) : (
+                    <img 
+                      src={sliderImages[currentSlide]} 
+                      alt={`${template.name} view ${currentSlide + 1}`} 
+                      loading="lazy"
+                      onClick={() => setSelectedImage(sliderImages[currentSlide])}
+                      style={{ width: '100%', height: 'auto', display: 'block', objectFit: template.imageFit || 'cover', cursor: 'zoom-in' }} 
+                    />
+                  )}
                   
                   {sliderImages.length > 1 && (
                     <>

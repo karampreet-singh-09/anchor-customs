@@ -572,20 +572,20 @@ body {
 }
 
 .how-it-works-grid {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  justify-content: center !important;
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
   gap: 1.5rem !important;
   width: 100% !important;
 }
 
 .how-it-works-grid > * {
-  flex: 1 1 200px !important;
-  max-width: 250px !important;
+  width: 100% !important;
+  display: flex !important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .how-it-works-grid {
+    display: flex !important;
     flex-wrap: nowrap !important;
     justify-content: flex-start !important;
     overflow-x: auto !important;
@@ -593,13 +593,14 @@ body {
     scroll-snap-type: x mandatory;
     width: 100% !important;
     scrollbar-width: none;
+    gap: 1.5rem !important;
   }
   .how-it-works-grid::-webkit-scrollbar {
     display: none;
   }
   .how-it-works-grid > * {
-    flex: 0 0 220px !important;
-    max-width: 220px !important;
+    flex: 0 0 240px !important;
+    max-width: 240px !important;
     scroll-snap-align: center;
   }
 }
@@ -671,3 +672,154 @@ body {
   50% { transform: translateX(6px); opacity: 1; }
   100% { transform: translateX(0); opacity: 0.6; }
 }
+
+/* 3D Book Styling */
+.book-container-3d {
+  position: relative;
+  width: 250px;
+  height: 340px;
+  perspective: 1200px;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+@media (min-width: 769px) {
+  .book-container-3d {
+    width: 290px;
+    height: 400px;
+  }
+}
+
+.book-3d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateY(-20deg) rotateX(8deg);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.book-container-3d:hover .book-3d {
+  transform: rotateY(-5deg) rotateX(4deg) scale(1.05);
+}
+
+.book-cover-front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: left center;
+  transform: translateZ(10px);
+  transform-style: preserve-3d;
+  border-radius: 0 12px 12px 0;
+  overflow: hidden;
+  box-shadow: inset 4px 0 10px rgba(0,0,0,0.15), 2px 2px 15px rgba(0,0,0,0.15);
+  background-color: var(--accent);
+}
+
+.book-cover-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Premium Spine Shadow & Crease Effect */
+.book-cover-front::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10px;
+  width: 2px;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Elegant Glare Effect on Front Cover */
+.book-cover-front::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.1) 25%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 75%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.book-cover-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #2b1f1a;
+  transform: translateZ(-10px);
+  border-radius: 0 12px 12px 0;
+  box-shadow: -15px 15px 35px rgba(0,0,0,0.25);
+}
+
+.book-spine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px; /* thickness */
+  height: 100%;
+  background: linear-gradient(to right, #725b43 0%, #af9170 30%, #af9170 70%, #725b43 100%);
+  transform: rotateY(-90deg) translateZ(10px);
+  transform-origin: left center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.3);
+}
+
+.book-spine-text {
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-sans);
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+}
+
+/* 3D Pages styling to give depth */
+.book-pages {
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  width: calc(100% - 10px);
+  height: calc(100% - 6px);
+  background: #fdfdfd;
+  transform: translateZ(0);
+  border-radius: 0 10px 10px 0;
+  box-shadow: inset -3px 0 8px rgba(0,0,0,0.08), 5px 0 10px rgba(0,0,0,0.1);
+  border-right: 1px solid #e0e0e0;
+}
+
+/* Page layers texturing */
+.book-pages::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(to right, #ffffff, #ffffff 3px, #f4f4f4 3px, #f4f4f4 4px);
+  opacity: 0.4;
+}
+

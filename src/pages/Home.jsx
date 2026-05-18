@@ -112,12 +112,14 @@ const Home = () => {
         }}>
         <div className="container hero-grid" style={{ 
           display: 'flex', 
-          flexDirection: 'column',
+          flexDirection: isMobile ? 'column' : 'row',
           alignItems: 'center', 
-          justifyContent: 'center',
-          textAlign: 'center',
+          justifyContent: 'space-between',
+          textAlign: isMobile ? 'center' : 'left',
           position: 'relative',
-          zIndex: 2
+          zIndex: 2,
+          gap: isMobile ? '3rem' : '4rem',
+          width: '100%'
         }}>
           {/* Gen-Z Background Scribbles & Elements */}
           <div className="scribble-text" style={{ top: '-8%', left: '5%', transform: 'rotate(-15deg)' }}>no cap 🧢</div>
@@ -135,22 +137,93 @@ const Home = () => {
           <Heart className="scribble-text" size={24} style={{ bottom: '15%', left: '5%', transform: 'rotate(-20deg)' }} />
           <Star className="scribble-text" size={20} style={{ top: '55%', left: '12%', transform: 'rotate(45deg)' }} />
           <Heart className="scribble-text" size={28} style={{ top: '5%', left: '25%', transform: 'rotate(10deg)' }} />
+          
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="hero-text"
-            style={{ maxWidth: '800px', margin: '0 auto' }}
+            style={{ 
+              maxWidth: isMobile ? '800px' : '55%', 
+              margin: isMobile ? '0 auto' : '0',
+              paddingLeft: isMobile ? '0' : '4.5rem',
+              flex: 1.2
+            }}
           >
-            <h1 className="hero-title">You're not basic. <br /> Your gifts shouldn't be <span className="hero-subtitle">either.</span></h1>
-            <p className="hero-desc">
+            <h1 className="hero-title" style={{ fontSize: isMobile ? '3.5rem' : '4.5rem', lineHeight: '1.1' }}>
+              You're not basic. <br /> Your gifts shouldn't be <span className="hero-subtitle">either.</span>
+            </h1>
+            <p className="hero-desc" style={{ margin: isMobile ? '1.5rem auto' : '1.5rem 0', textAlign: isMobile ? 'center' : 'left' }}>
               You might cry <span className="hero-desc-accent">(in a cute way)</span>. Turning your memories into something you can <span className="hero-desc-accent">hold forever</span>
             </p>
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '3rem' }}>
+            <div style={{ display: 'flex', justifyContent: isMobile ? 'center' : 'flex-start', marginTop: '2.5rem' }}>
               <button onClick={scrollToCollection} className="btn btn-primary hero-btn" style={{ opacity: 1, boxShadow: '0 4px 15px rgba(177, 145, 113, 0.5)' }}>
                 View Collection <ArrowDown size={18} />
               </button>
             </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            style={{
+              flex: 0.8,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '100%',
+              maxWidth: '350px',
+              marginTop: isMobile ? '2.5rem' : '0',
+              position: 'relative'
+            }}
+          >
+            <Link to="/template/mag_chaar_kadam" style={{ display: 'block', textDecoration: 'none' }}>
+              <div className="book-container-3d">
+                <div className="book-3d">
+                  <div className="book-cover-front">
+                    <img 
+                      src="/products/MAGAZINE TEMPLATES/CHAAR KADAM-WEBSITE.jpg" 
+                      alt="Chaar Kadam Magazine" 
+                      loading="eager"
+                    />
+                  </div>
+                  <div className="book-spine">
+                    <span className="book-spine-text">CHAAR KADAM</span>
+                  </div>
+                  <div className="book-pages"></div>
+                  <div className="book-cover-back"></div>
+                </div>
+                
+                {/* Cute Floating Interactive Badge */}
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                  style={{
+                    position: 'absolute',
+                    bottom: '-1rem',
+                    right: '-1rem',
+                    background: 'var(--accent)',
+                    color: '#fff',
+                    padding: '0.4rem 0.8rem',
+                    borderRadius: '20px',
+                    fontSize: '0.75rem',
+                    fontWeight: 'bold',
+                    boxShadow: 'var(--gold-glow)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.3rem',
+                    zIndex: 10,
+                    pointerEvents: 'none',
+                    whiteSpace: 'nowrap',
+                    fontFamily: 'var(--font-sans)',
+                    border: '1px solid rgba(255,255,255,0.2)'
+                  }}
+                >
+                  📖 Click to Flip Inside!
+                </motion.div>
+              </div>
+            </Link>
           </motion.div>
         </div>
       </section>
@@ -394,17 +467,23 @@ const Home = () => {
                 whileHover={{ y: -10 }}
                 style={{ 
                   textAlign: 'center', 
-                  padding: '1.2rem 1rem', 
+                  padding: '2rem 1.2rem', 
                   backgroundColor: 'var(--glass)', 
                   backdropFilter: 'blur(10px)',
                   border: '1px solid var(--border)', 
                   borderRadius: 'var(--radius)',
-                  height: '100%'
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                  boxShadow: 'var(--shadow)',
+                  height: '100%',
+                  width: '100%'
                 }}
               >
                 <div style={{ color: 'var(--accent)', marginBottom: '1.2rem' }}>{f.icon}</div>
                 <h3 style={{ marginBottom: '0.8rem', fontSize: '1.1rem' }}>{f.title}</h3>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', lineHeight: 1.4 }}>{f.desc}</p>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', lineHeight: 1.4, margin: 0 }}>{f.desc}</p>
               </motion.div>
             ))}
           </div>
