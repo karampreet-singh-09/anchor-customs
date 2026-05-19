@@ -63,21 +63,19 @@ const Auth = () => {
                 width: '80px',
                 height: '80px',
                 borderRadius: '50%',
-                background: '#ffffff',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 margin: '0 auto 1.25rem',
                 boxShadow: 'var(--shadow), 0 4px 12px rgba(175, 145, 112, 0.15)',
-                border: '1px solid var(--border)',
                 overflow: 'hidden',
-                padding: '12px'
+                padding: '0'
               }}
             >
               <img 
                 src="/logo_anchor.png" 
                 alt="Anchor Customs" 
-                style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
               />
             </div>
             <h1
