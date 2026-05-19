@@ -1,8 +1,11 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Camera, Heart, Truck, CheckCircle, Star, User, ArrowLeft, ArrowRight, ChevronDown } from 'lucide-react';
 import { TEMPLATES } from '../utils/data';
+import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
+import toast from 'react-hot-toast';
 
 const ProductCardContent = ({ template }) => {
   const isMob = window.innerWidth <= 768;
@@ -115,6 +118,9 @@ const ProductCardContent = ({ template }) => {
 const Home = () => {
   const collectionRef = useRef(null);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
+  const { addToCart, cartItems } = useCart();
   const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
 
@@ -142,6 +148,42 @@ const Home = () => {
   const scrollToCollection = () => {
     collectionRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const handleRibbonClick = () => {
+    if (!currentUser) {
+      localStorage.setItem('claimFreeGift', 'true');
+      toast('Redirecting to login to claim your free gift! 🎁', { icon: '🔑' });
+      navigate('/login');
+    } else {
+      const hasGift = cartItems.some(item => item.id === 'free_gift_hotwheels' || item.templateId === 'free_gift_hotwheels');
+      if (hasGift) {
+        toast.error('Free Hot Wheels Gift is already in your cart! 🎁');
+      } else {
+        const freeGift = {
+          id: 'free_gift_hotwheels',
+          templateId: 'free_gift_hotwheels',
+          templateName: 'Free Hot Wheels Gift',
+          pages: 'Special Collectible',
+          price: 0,
+          images: ['/products/free_hot_wheels.png'],
+          coverImage: '/products/free_hot_wheels.png',
+          coverPhoto: '/products/free_hot_wheels.png',
+          status: 'free_gift',
+          customerDetails: {
+            fullName: currentUser.user_metadata?.full_name || '',
+            whatsapp: '',
+            email: currentUser.email || '',
+            address: '',
+            specialNotes: 'Free Gift claimed via promo ribbon'
+          }
+        };
+        addToCart(freeGift);
+        toast.success('Free Hot Wheels Gift added to your cart! 🎁');
+      }
+    }
+  };
+
+  const ribbonText = Array(12).fill(currentUser ? "CLAIM YOUR FREE GIFT  ★" : "LOGIN FOR A FREE GIFT  ★").join("  ");
 
   return (
     <div className="home-page">
@@ -586,6 +628,75 @@ const Home = () => {
           )}
         </div>
       </section>
+
+      {/* Wavy Free Gift Banner Ribbon */}
+      <div 
+        onClick={handleRibbonClick}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = 'scale(1.02)';
+          e.currentTarget.style.transition = 'transform 0.3s ease';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'scale(1)';
+          e.currentTarget.style.transition = 'transform 0.3s ease';
+        }}
+        style={{
+          width: '100%',
+          overflow: 'hidden',
+          cursor: 'pointer',
+          padding: '2rem 0',
+          position: 'relative',
+          background: 'transparent',
+          zIndex: 10,
+          userSelect: 'none',
+          marginTop: isMobile ? '-2rem' : '-4rem',
+          marginBottom: isMobile ? '-2rem' : '-4rem'
+        }}
+      >
+        <svg 
+          viewBox="0 0 1440 280" 
+          width="100%" 
+          height="100%" 
+          style={{ display: 'block', overflow: 'visible' }}
+        >
+          {/* Shadow Ribbon underlay */}
+          <path 
+            d="M -100,140 C 150,40 350,240 600,140 C 850,40 1050,240 1300,140 C 1550,40 1750,240 2000,140" 
+            fill="none" 
+            stroke="rgba(0,0,0,0.06)" 
+            strokeWidth="90" 
+            strokeLinecap="round" 
+          />
+          {/* Main Beige/Brown Ribbon background */}
+          <path 
+            id="ribbonPath"
+            d="M -100,140 C 150,40 350,240 600,140 C 850,40 1050,240 1300,140 C 1550,40 1750,240 2000,140" 
+            fill="none" 
+            stroke="var(--accent)" 
+            strokeWidth="80" 
+            strokeLinecap="round" 
+          />
+          {/* Text path */}
+          <text 
+            fill="white" 
+            fontSize={isMobile ? "20" : "18"} 
+            fontWeight="900" 
+            letterSpacing="3"
+            style={{ fontFamily: 'var(--font-sans)', textTransform: 'uppercase' }}
+          >
+            <textPath href="#ribbonPath" startOffset="0%">
+              {ribbonText}
+              <animate 
+                attributeName="startOffset" 
+                from="0%" 
+                to="-60%" 
+                dur="20s" 
+                repeatCount="indefinite" 
+              />
+            </textPath>
+          </text>
+        </svg>
+      </div>
 
       {/* Features Editorial Section */}
       <section className="section-padding" style={{ backgroundColor: 'var(--bg)', position: 'relative', overflow: 'hidden', padding: isMobile ? '2rem 0 0.5rem 0' : '5rem 0' }}>

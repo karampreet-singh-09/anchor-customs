@@ -49,7 +49,7 @@ const Cart = () => {
                 <div style={{ flex: 1 }}>
                   <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>{item.templateName}</h3>
                   <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
-                    {item.pages} Pages Magazine
+                    {typeof item.pages === 'number' || (item.pages && !isNaN(Number(item.pages))) ? `${item.pages} Pages Magazine` : item.pages || ''}
                   </p>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontWeight: 'bold' }}>₹{item.price}</span>

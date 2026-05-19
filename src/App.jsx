@@ -1,8 +1,45 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
-import { AuthProvider } from './context/AuthContext';
-import { CartProvider } from './context/CartContext';
+import { Toaster, toast } from 'react-hot-toast';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import { CartProvider, useCart } from './context/CartContext';
+
+// Listener to handle adding free gift after successful login
+const FreeGiftListener = () => {
+  const { currentUser } = useAuth();
+  const { addToCart, cartItems } = useCart();
+
+  React.useEffect(() => {
+    if (currentUser && localStorage.getItem('claimFreeGift') === 'true') {
+      const hasGift = cartItems.some(item => item.id === 'free_gift_hotwheels' || item.templateId === 'free_gift_hotwheels');
+      if (!hasGift) {
+        const freeGift = {
+          id: 'free_gift_hotwheels',
+          templateId: 'free_gift_hotwheels',
+          templateName: 'Free Hot Wheels Gift',
+          pages: 'Special Collectible',
+          price: 0,
+          images: ['/products/free_hot_wheels.png'],
+          coverImage: '/products/free_hot_wheels.png',
+          coverPhoto: '/products/free_hot_wheels.png',
+          status: 'free_gift',
+          customerDetails: {
+            fullName: currentUser.user_metadata?.full_name || '',
+            whatsapp: '',
+            email: currentUser.email || '',
+            address: '',
+            specialNotes: 'Free Gift claimed via promo ribbon'
+          }
+        };
+        addToCart(freeGift);
+        toast.success('Welcome! Your Free Hot Wheels Gift has been added to your cart! 🎁', { duration: 5000 });
+      }
+      localStorage.removeItem('claimFreeGift');
+    }
+  }, [currentUser, cartItems, addToCart]);
+
+  return null;
+};
 
 // Components
 import Navbar from './components/Navbar';
@@ -32,6 +69,7 @@ function App() {
       <CartProvider>
         <Router>
           <ScrollToTop />
+          <FreeGiftListener />
           <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
             <Navbar />
             <main style={{ flex: 1 }}>
