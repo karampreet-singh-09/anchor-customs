@@ -60,21 +60,25 @@ const Auth = () => {
           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
             <div
               style={{
-                width: '64px',
-                height: '64px',
+                width: '80px',
+                height: '80px',
                 borderRadius: '50%',
-                background: 'linear-gradient(135deg, var(--navy), var(--accent))',
+                background: '#ffffff',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 margin: '0 auto 1.25rem',
-                boxShadow: 'var(--gold-glow)',
+                boxShadow: 'var(--shadow), 0 4px 12px rgba(175, 145, 112, 0.15)',
+                border: '1px solid var(--border)',
+                overflow: 'hidden',
+                padding: '12px'
               }}
             >
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
+              <img 
+                src="/logo_anchor.png" 
+                alt="Anchor Customs" 
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+              />
             </div>
             <h1
               style={{
