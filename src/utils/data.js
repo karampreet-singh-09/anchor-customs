@@ -31,7 +31,7 @@ export const TEMPLATES = [
         "Memory Keepsakes"
       ],
       importantInfo: [
-        "Price: ₹999 — FREE SHIPPING",
+        "Price: ₹999",
         "Privacy Policy: Your order will never be posted on our page without your permission. We deeply respect your privacy and personal memories 🤍"
       ]
     }
@@ -68,7 +68,7 @@ export const TEMPLATES = [
         "Memory Keepsakes"
       ],
       importantInfo: [
-        "Price: ₹999 — FREE SHIPPING",
+        "Price: ₹999",
         "Privacy Policy: Your order will never be posted on our page without your permission. We deeply respect your privacy and personal memories 🤍"
       ]
     }
@@ -105,7 +105,7 @@ export const TEMPLATES = [
         "Memory Keepsakes"
       ],
       importantInfo: [
-        "Price: ₹999 — FREE SHIPPING",
+        "Price: ₹999",
         "Privacy Policy: Your order will never be posted on our page without your permission. We deeply respect your privacy and personal memories 🤍"
       ]
     }
@@ -142,7 +142,7 @@ export const TEMPLATES = [
         "Memory Keepsakes"
       ],
       importantInfo: [
-        "Price: ₹999 — FREE SHIPPING",
+        "Price: ₹999",
         "Privacy Policy: Your order will never be posted on our page without your permission. We deeply respect your privacy and personal memories 🤍"
       ]
     }
@@ -179,7 +179,7 @@ export const TEMPLATES = [
         "Memory Keepsakes"
       ],
       importantInfo: [
-        "Price: ₹999 — FREE SHIPPING",
+        "Price: ₹999",
         "Privacy Policy: Your order will never be posted on our page without your permission. We deeply respect your privacy and personal memories 🤍"
       ]
     }
@@ -470,7 +470,7 @@ export const TEMPLATES = [
         "Desk & Room Decor"
       ],
       importantInfo: [
-        "Price: ₹999 — FREE SHIPPING",
+        "Price: ₹999",
         "Privacy Policy: We value your trust. Your order will never be posted publicly without your permission."
       ]
     }
@@ -493,7 +493,6 @@ export const TEMPLATES = [
         "We can also increase the number of pages if you have more photos to include."
       ],
       importantInfo: [
-        "Free Shipping Available",
         "Online Payments Only (UPI)",
         "No Cash on Delivery"
       ],

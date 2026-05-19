@@ -14,6 +14,7 @@ const CustomizationForm = () => {
   const { currentUser } = useAuth();
   const { addToCart } = useCart();
   const template = TEMPLATES.find(t => t.id === id);
+  const isFrame = template?.category === 'Frames' || template?.category === 'Frame' || template?.category === 'Aesthetic' || template?.id?.toLowerCase().includes('frame');
   const fileInputRef = useRef(null);
   const coverInputRef = useRef(null);
 
@@ -21,7 +22,11 @@ const CustomizationForm = () => {
     fullName: '',
     whatsapp: '',
     email: currentUser?.email || '',
-    address: '',
+    houseNo: '',
+    street: '',
+    city: '',
+    state: '',
+    pincode: '',
     specialNotes: ''
   });
 
@@ -97,13 +102,29 @@ const CustomizationForm = () => {
       return;
     }
     
-    if (!formData.address.trim()) {
-      toast.error('Please provide a delivery address');
+    if (!formData.houseNo.trim()) {
+      toast.error('Please enter your House / Flat / Apartment No.');
+      return;
+    }
+    if (!formData.street.trim()) {
+      toast.error('Please enter your Street / Area / Locality');
+      return;
+    }
+    if (!formData.city.trim()) {
+      toast.error('Please enter your City');
+      return;
+    }
+    if (!formData.state.trim()) {
+      toast.error('Please enter your State');
+      return;
+    }
+    if (!formData.pincode.trim() || !/^\d{6}$/.test(formData.pincode.trim())) {
+      toast.error('Please enter a valid 6-digit Pincode');
       return;
     }
 
     if (template.id !== 'kaleshi_aurat') {
-      if (!coverPhoto) {
+      if (!isFrame && !coverPhoto) {
         toast.error('Please upload a cover photo');
         return;
       }
@@ -133,7 +154,10 @@ const CustomizationForm = () => {
         const safeName = formData.fullName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
         const folderPath = `${safeName}_${Date.now()}`;
 
-        const coverUrl = await uploadFile(coverPhoto, 'photos', 'cover', formData, folderPath);
+        let coverUrl = null;
+        if (!isFrame) {
+          coverUrl = await uploadFile(coverPhoto, 'photos', 'cover', formData, folderPath);
+        }
         
         let completed = 0;
         const photoUrls = [];
@@ -148,7 +172,7 @@ const CustomizationForm = () => {
           const realProgress = 30 + (completed / photos.length * 60);
           setUploadProgress(prev => Math.max(prev, realProgress));
         }
-        finalImages = [coverUrl, ...photoUrls];
+        finalImages = isFrame ? photoUrls : [coverUrl, ...photoUrls];
         clearInterval(progressInterval);
         setUploadProgress(100);
       } else {
@@ -165,6 +189,7 @@ const CustomizationForm = () => {
         price: pages === '10' ? template.price10 : template.price12,
         customerDetails: {
           ...formData,
+          address: `${formData.houseNo.trim()}, ${formData.street.trim()}, ${formData.city.trim()}, ${formData.state.trim()} - ${formData.pincode.trim()}`,
           customText: '' // Field removed from UI but kept for compatibility
         },
         images: finalImages,
@@ -256,46 +281,116 @@ const CustomizationForm = () => {
             </div>
           </div>
 
-          <div className="input-group">
-            <label className="input-label">Delivery Address</label>
-            <textarea 
-              name="address" 
-              className="input-field" 
-              rows="3" 
-              onChange={handleInputChange} 
-              placeholder="House No, Street, City, State, Pincode"
-            ></textarea>
-            <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '0.3rem', display: 'block' }}>Must include City, State, and 6-digit Pincode.</span>
+          {/* Delivery Address Fields */}
+          <h3 style={{ 
+            margin: '2rem 0 1rem 0', 
+            fontSize: '1.2rem', 
+            color: 'var(--navy)', 
+            fontFamily: 'var(--font-serif)', 
+            borderBottom: '1px solid var(--border)', 
+            paddingBottom: '0.5rem' 
+          }}>
+            Delivery Address
+          </h3>
+          
+          <div className="responsive-grid">
+            <div className="input-group">
+              <label className="input-label">House / Flat / Apartment No.</label>
+              <input 
+                type="text" 
+                name="houseNo" 
+                className="input-field" 
+                onChange={handleInputChange} 
+                placeholder="e.g. Flat 101, Building A" 
+                required
+              />
+            </div>
+            <div className="input-group">
+              <label className="input-label">Street / Area / Locality</label>
+              <input 
+                type="text" 
+                name="street" 
+                className="input-field" 
+                onChange={handleInputChange} 
+                placeholder="e.g. Sector 15, Park Road" 
+                required
+              />
+            </div>
+          </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+            gap: '1.5rem',
+            marginTop: '1.5rem',
+            marginBottom: '2rem'
+          }}>
+            <div className="input-group">
+              <label className="input-label">City</label>
+              <input 
+                type="text" 
+                name="city" 
+                className="input-field" 
+                onChange={handleInputChange} 
+                placeholder="e.g. New Delhi" 
+                required
+              />
+            </div>
+            <div className="input-group">
+              <label className="input-label">State</label>
+              <input 
+                type="text" 
+                name="state" 
+                className="input-field" 
+                onChange={handleInputChange} 
+                placeholder="e.g. Delhi" 
+                required
+              />
+            </div>
+            <div className="input-group">
+              <label className="input-label">Pincode</label>
+              <input 
+                type="tel" 
+                name="pincode" 
+                className="input-field" 
+                onChange={handleInputChange} 
+                placeholder="6-digit PIN" 
+                maxLength="6"
+                required
+              />
+            </div>
           </div>
 
           {template.id !== 'kaleshi_aurat' && (
             <>
-              <div style={{ margin: '2rem 0' }}>
-                <h3 style={{ marginBottom: '1rem', fontSize: '1.1rem' }}>Cover Photo</h3>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
-                  <input 
-                    type="file" 
-                    ref={coverInputRef}
-                    hidden 
-                    accept="image/*" 
-                    onChange={(e) => {
-                      const file = e.target.files[0];
-                      if (file) {
-                        setCoverPhoto(file);
-                        toast.success('Cover photo selected!');
-                      }
-                    }} 
-                  />
-                  <button 
-                    type="button"
-                    className="btn btn-outline" 
-                    onClick={() => coverInputRef.current.click()}
-                  >
-                    <Upload size={18} /> Choose Cover
-                  </button>
-                  {coverPhoto && <span style={{ fontSize: '0.8rem', color: 'var(--accent)', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>✓ {coverPhoto.name}</span>}
+              {!isFrame && (
+                <div style={{ margin: '2rem 0' }}>
+                  <h3 style={{ marginBottom: '1rem', fontSize: '1.1rem' }}>Cover Photo</h3>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+                    <input 
+                      type="file" 
+                      ref={coverInputRef}
+                      hidden 
+                      accept="image/*" 
+                      onChange={(e) => {
+                        const file = e.target.files[0];
+                        if (file) {
+                          setCoverPhoto(file);
+                          toast.success('Cover photo selected!');
+                        }
+                      }} 
+                    />
+                    <button 
+                      type="button"
+                      className="btn btn-outline" 
+                      onClick={() => coverInputRef.current.click()}
+                    >
+                      <Upload size={18} /> Choose Cover
+                    </button>
+                    {coverPhoto && <span style={{ fontSize: '0.8rem', color: 'var(--accent)', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>✓ {coverPhoto.name}</span>}
+                  </div>
                 </div>
-              </div>
+              )}
 
               <div style={{ margin: '2rem 0' }}>
                 <h3 style={{ marginBottom: '1rem', fontSize: '1.1rem' }}>

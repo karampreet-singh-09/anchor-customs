@@ -214,8 +214,8 @@ const Home = () => {
             fontSize: isMobile ? '24vw' : '16vw',
             fontWeight: 900,
             letterSpacing: '-0.03em',
-            color: '#E5DCD3',
-            opacity: 0.9,
+            color: 'var(--text)',
+            opacity: 0.25,
             margin: 0,
             lineHeight: 1,
             textShadow: isMobile 
@@ -325,6 +325,75 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Wavy Free Gift Banner Ribbon */}
+      <div 
+        onClick={handleRibbonClick}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = 'scale(1.02)';
+          e.currentTarget.style.transition = 'transform 0.3s ease';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'scale(1)';
+          e.currentTarget.style.transition = 'transform 0.3s ease';
+        }}
+        style={{
+          width: '100%',
+          overflow: 'hidden',
+          cursor: 'pointer',
+          padding: '2rem 0',
+          position: 'relative',
+          background: 'transparent',
+          zIndex: 10,
+          userSelect: 'none',
+          marginTop: isMobile ? '-2rem' : '-4rem',
+          marginBottom: isMobile ? '-2rem' : '-4rem'
+        }}
+      >
+        <svg 
+          viewBox="0 0 1440 280" 
+          width="100%" 
+          height="100%" 
+          style={{ display: 'block', overflow: 'visible' }}
+        >
+          {/* Shadow Ribbon underlay */}
+          <path 
+            d="M -100,140 C 150,40 350,240 600,140 C 850,40 1050,240 1300,140 C 1550,40 1750,240 2000,140" 
+            fill="none" 
+            stroke="rgba(0,0,0,0.06)" 
+            strokeWidth="90" 
+            strokeLinecap="round" 
+          />
+          {/* Main Beige/Brown Ribbon background */}
+          <path 
+            id="ribbonPath"
+            d="M -100,140 C 150,40 350,240 600,140 C 850,40 1050,240 1300,140 C 1550,40 1750,240 2000,140" 
+            fill="none" 
+            stroke="var(--accent)" 
+            strokeWidth="80" 
+            strokeLinecap="round" 
+          />
+          {/* Text path */}
+          <text 
+            fill="white" 
+            fontSize={isMobile ? "20" : "18"} 
+            fontWeight="900" 
+            letterSpacing="3"
+            style={{ fontFamily: 'var(--font-sans)', textTransform: 'uppercase' }}
+          >
+            <textPath href="#ribbonPath" startOffset="0%">
+              {ribbonText}
+              <animate 
+                attributeName="startOffset" 
+                from="0%" 
+                to="-60%" 
+                dur="20s" 
+                repeatCount="indefinite" 
+              />
+            </textPath>
+          </text>
+        </svg>
+      </div>
 
       {/* New Arrivals Section */}
       <section style={{ 
@@ -458,74 +527,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Wavy Free Gift Banner Ribbon */}
-      <div 
-        onClick={handleRibbonClick}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = 'scale(1.02)';
-          e.currentTarget.style.transition = 'transform 0.3s ease';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'scale(1)';
-          e.currentTarget.style.transition = 'transform 0.3s ease';
-        }}
-        style={{
-          width: '100%',
-          overflow: 'hidden',
-          cursor: 'pointer',
-          padding: '2rem 0',
-          position: 'relative',
-          background: 'transparent',
-          zIndex: 10,
-          userSelect: 'none',
-          marginTop: isMobile ? '-2rem' : '-4rem',
-          marginBottom: isMobile ? '-2rem' : '-4rem'
-        }}
-      >
-        <svg 
-          viewBox="0 0 1440 280" 
-          width="100%" 
-          height="100%" 
-          style={{ display: 'block', overflow: 'visible' }}
-        >
-          {/* Shadow Ribbon underlay */}
-          <path 
-            d="M -100,140 C 150,40 350,240 600,140 C 850,40 1050,240 1300,140 C 1550,40 1750,240 2000,140" 
-            fill="none" 
-            stroke="rgba(0,0,0,0.06)" 
-            strokeWidth="90" 
-            strokeLinecap="round" 
-          />
-          {/* Main Beige/Brown Ribbon background */}
-          <path 
-            id="ribbonPath"
-            d="M -100,140 C 150,40 350,240 600,140 C 850,40 1050,240 1300,140 C 1550,40 1750,240 2000,140" 
-            fill="none" 
-            stroke="var(--accent)" 
-            strokeWidth="80" 
-            strokeLinecap="round" 
-          />
-          {/* Text path */}
-          <text 
-            fill="white" 
-            fontSize={isMobile ? "20" : "18"} 
-            fontWeight="900" 
-            letterSpacing="3"
-            style={{ fontFamily: 'var(--font-sans)', textTransform: 'uppercase' }}
-          >
-            <textPath href="#ribbonPath" startOffset="0%">
-              {ribbonText}
-              <animate 
-                attributeName="startOffset" 
-                from="0%" 
-                to="-60%" 
-                dur="20s" 
-                repeatCount="indefinite" 
-              />
-            </textPath>
-          </text>
-        </svg>
-      </div>
+
 
       {/* Product Collection Section */}
       <section ref={collectionRef} className="section-padding" style={{ backgroundColor: 'var(--bg-offset)' }}>

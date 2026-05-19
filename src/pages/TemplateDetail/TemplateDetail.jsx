@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { TEMPLATES } from '../../utils/data';
-import { CheckCircle, ArrowRight, Heart, ChevronLeft, ChevronRight, ArrowLeft, Truck } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 import HTMLFlipBook from 'react-pageflip';
 
@@ -448,7 +448,6 @@ const TemplateDetail = () => {
                   </span>
                 )}
               </div>
-              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0 }}>Free Shipping across India</p>
             </div>
 
             <p style={{ fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '2rem', lineHeight: '1.5' }}>
@@ -595,34 +594,7 @@ const TemplateDetail = () => {
           </div>
         </div>
       </div>
-      {/* Trust / Features Banner */}
-      <section style={{ padding: '4rem 0', background: 'var(--bg)', borderTop: '1px solid var(--border)', marginTop: '4rem' }}>
-        <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'center', gap: isMobile ? '1rem' : '2rem', textAlign: 'center', flexWrap: 'nowrap' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', flex: '1 1 0', minWidth: 0 }}>
-              <div style={{ background: 'var(--bg-offset)', padding: isMobile ? '0.7rem' : '1rem', borderRadius: '50%', color: 'var(--accent)', boxShadow: 'var(--shadow)' }}>
-                <CheckCircle size={isMobile ? 22 : 28} />
-              </div>
-              <h4 style={{ fontSize: isMobile ? '0.85rem' : '1.2rem', fontFamily: 'var(--font-serif)', margin: 0 }}>Premium Quality</h4>
-              {!isMobile && <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>Handcrafted with high-quality materials to last a lifetime.</p>}
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', flex: '1 1 0', minWidth: 0 }}>
-              <div style={{ background: 'var(--bg-offset)', padding: isMobile ? '0.7rem' : '1rem', borderRadius: '50%', color: 'var(--accent)', boxShadow: 'var(--shadow)' }}>
-                <Heart size={isMobile ? 22 : 28} />
-              </div>
-              <h4 style={{ fontSize: isMobile ? '0.85rem' : '1.2rem', fontFamily: 'var(--font-serif)', margin: 0 }}>Personalized</h4>
-              {!isMobile && <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>Designed exclusively with your favorite memories and text.</p>}
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', flex: '1 1 0', minWidth: 0 }}>
-              <div style={{ background: 'var(--bg-offset)', padding: isMobile ? '0.7rem' : '1rem', borderRadius: '50%', color: 'var(--accent)', boxShadow: 'var(--shadow)' }}>
-                <Truck size={isMobile ? 22 : 28} />
-              </div>
-              <h4 style={{ fontSize: isMobile ? '0.85rem' : '1.2rem', fontFamily: 'var(--font-serif)', margin: 0 }}>Free Shipping</h4>
-              {!isMobile && <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>Enjoy free delivery across India on all your orders.</p>}
-            </div>
-          </div>
-        </div>
-      </section>
+
     </div>
   );
 };

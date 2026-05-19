@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
-import { ShoppingCart, User, Menu, X, LogOut } from 'lucide-react';
+import { ShoppingCart, User, Menu, X, LogOut, ChevronDown } from 'lucide-react';
 
 const Navbar = () => {
   const { currentUser, isAdmin, logout } = useAuth();
   const { cartItems } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCategoriesDropdownOpen, setIsCategoriesDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -160,6 +161,10 @@ const Navbar = () => {
           font-size: 1.1rem;
           text-decoration: none;
         }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-5px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
       `}</style>
       
       {isMenuOpen && (
@@ -168,14 +173,52 @@ const Navbar = () => {
           <Link to="/faq" onClick={() => setIsMenuOpen(false)}>FAQ</Link>
           
           <div style={{ margin: '0.5rem 0' }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '1px' }}>Categories</span>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: '0.8rem', paddingLeft: '0.5rem', borderLeft: '2px solid var(--border)' }}>
-              <Link to="/?category=Magazines" onClick={() => setIsMenuOpen(false)} style={{ fontSize: '1rem', opacity: 0.8 }}>Magazines</Link>
-              <Link to="/?category=Premium Gifts" onClick={() => setIsMenuOpen(false)} style={{ fontSize: '1rem', opacity: 0.8 }}>Premium Gifts</Link>
-              <Link to="/?category=Combos" onClick={() => setIsMenuOpen(false)} style={{ fontSize: '1rem', opacity: 0.8 }}>Combos</Link>
-              <Link to="/?category=Frames & Decor" onClick={() => setIsMenuOpen(false)} style={{ fontSize: '1rem', opacity: 0.8 }}>Frames & Decor</Link>
-              <Link to="/?category=Apparel" onClick={() => setIsMenuOpen(false)} style={{ fontSize: '1rem', opacity: 0.8 }}>Apparel</Link>
-            </div>
+            <button 
+              onClick={() => setIsCategoriesDropdownOpen(!isCategoriesDropdownOpen)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                width: '100%',
+                background: 'none',
+                border: 'none',
+                padding: '0.5rem 0',
+                color: 'var(--text)',
+                fontSize: '1.1rem',
+                fontWeight: '600',
+                cursor: 'pointer',
+                textAlign: 'left',
+                fontFamily: 'var(--font-sans)'
+              }}
+            >
+              <span>CATEGORIES</span>
+              <span style={{ 
+                transform: isCategoriesDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)', 
+                transition: 'transform 0.2s ease',
+                display: 'inline-flex',
+                alignItems: 'center'
+              }}>
+                <ChevronDown size={18} color="var(--accent)" />
+              </span>
+            </button>
+            
+            {isCategoriesDropdownOpen && (
+              <div style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                gap: '0.8rem', 
+                marginTop: '0.8rem', 
+                paddingLeft: '1rem', 
+                borderLeft: '2px solid var(--border)',
+                animation: 'fadeIn 0.2s ease'
+              }}>
+                <Link to={`/?category=${encodeURIComponent('Magazines')}`} onClick={() => setIsMenuOpen(false)} style={{ fontSize: '1rem', opacity: 0.8 }}>Magazines</Link>
+                <Link to={`/?category=${encodeURIComponent('Premium Gifts')}`} onClick={() => setIsMenuOpen(false)} style={{ fontSize: '1rem', opacity: 0.8 }}>Premium Gifts</Link>
+                <Link to={`/?category=${encodeURIComponent('Combos')}`} onClick={() => setIsMenuOpen(false)} style={{ fontSize: '1rem', opacity: 0.8 }}>Combos</Link>
+                <Link to={`/?category=${encodeURIComponent('Frames & Decor')}`} onClick={() => setIsMenuOpen(false)} style={{ fontSize: '1rem', opacity: 0.8 }}>Frames & Decor</Link>
+                <Link to={`/?category=${encodeURIComponent('Apparel & Accessories')}`} onClick={() => setIsMenuOpen(false)} style={{ fontSize: '1rem', opacity: 0.8 }}>Apparel</Link>
+              </div>
+            )}
           </div>
 
 

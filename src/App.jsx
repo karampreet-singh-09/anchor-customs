@@ -93,12 +93,27 @@ function App() {
                 <Route path="/shipping" element={<Shipping />} />
                 
                 <Route path="/contact" element={
-                  <div className="section-padding container" style={{ maxWidth: '800px' }}>
-                    <h1 style={{ marginBottom: '2rem' }}>Contact Us</h1>
-                    <div className="card" style={{ padding: '2rem' }}>
-                      <p><strong>Support Email:</strong> hello@anchorcustoms.com</p>
-                      <p><strong>WhatsApp Support:</strong> +91 99999 88888</p>
-                      <p><strong>Office Address:</strong> Anchor Customs, High Street Mall, New Delhi, India - 110001</p>
+                  <div className="section-padding container" style={{ maxWidth: '500px', textAlign: 'center' }}>
+                    <h1 style={{ marginBottom: '2rem', fontFamily: 'var(--font-serif)' }}>Contact Us</h1>
+                    <div className="card" style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center' }}>
+                      <p style={{ margin: 0, fontSize: '1.1rem' }}>
+                        <strong>Email Us:</strong><br />
+                        <a href="mailto:anchorcustoms1@gmail.com" style={{ color: 'var(--accent)', textDecoration: 'none', fontSize: '1.15rem', fontWeight: '600' }}>
+                          anchorcustoms1@gmail.com
+                        </a>
+                      </p>
+                      <div style={{ width: '40px', height: '1px', backgroundColor: 'var(--border)' }}></div>
+                      <p style={{ margin: 0, fontSize: '1.1rem' }}>
+                        <strong>Follow Us:</strong><br />
+                        <a 
+                          href="https://www.instagram.com/anchor.customs?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          style={{ color: 'var(--accent)', textDecoration: 'none', fontSize: '1.15rem', fontWeight: '600' }}
+                        >
+                          @anchor.customs
+                        </a>
+                      </p>
                     </div>
                   </div>
                 } />
