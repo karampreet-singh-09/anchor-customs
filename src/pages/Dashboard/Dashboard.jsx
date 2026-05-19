@@ -55,7 +55,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <h2 style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>Your Orders</h2>
+        <h2 style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>Your Orders (Updated)</h2>
         
         {loading ? <p>Loading orders...</p> : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -70,6 +70,10 @@ const Dashboard = () => {
                   <div>
                     <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block' }}>Order Date</span>
                     <span style={{ fontWeight: '500' }}>{formatDate(order.created_at)}</span>
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block' }}>Order ID</span>
+                    <span style={{ fontWeight: '600', color: 'var(--navy)' }}>{order.display_id || `#${order.id.slice(0, 8)}`}</span>
                   </div>
                   <div>
                     <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block' }}>Status</span>

@@ -89,7 +89,7 @@ const AdminDashboard = () => {
                 <React.Fragment key={order.id}>
                   <tr style={{ borderBottom: 'none' }}>
                     <td style={{ padding: '1rem' }}>
-                      <span style={{ fontSize: '0.8rem', fontWeight: 'bold' }}>#{order.id.slice(0, 8)}</span>
+                      <span style={{ fontSize: '0.9rem', fontWeight: 'bold', color: 'var(--navy)' }}>{order.display_id || `#${order.id.slice(0, 8)}`}</span>
                       <span style={{ display: 'block', fontSize: '0.7rem', color: 'var(--text-muted)' }}>{formatDate(order.created_at)}</span>
                     </td>
                     <td style={{ padding: '1rem' }}>
