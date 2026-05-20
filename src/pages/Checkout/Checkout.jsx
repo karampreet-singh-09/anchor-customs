@@ -51,27 +51,16 @@ const Checkout = () => {
 
       console.log('Order saved to Supabase successfully!');
 
-      // Send WhatsApp Confirmation
-      try {
-        const customerDetails = cartItems[0]?.customerDetails;
-        if (customerDetails?.whatsapp) {
-          console.log('Sending WhatsApp confirmation...');
-          await supabase.functions.invoke('send-whatsapp', {
-            body: { 
-              phone: customerDetails.whatsapp,
-              customerName: customerDetails.fullName,
-              orderTotal: cartTotal
-            }
-          });
-        }
-      } catch (waError) {
-        console.error('Failed to send WhatsApp message:', waError);
-      }
+
 
       // Send Email Confirmation
       try {
         const customerDetails = cartItems[0]?.customerDetails;
         const customerEmail = customerDetails?.email || currentUser?.email;
+        console.log('--- DEBUG EMAIL INFO ---');
+        console.log('Customer Email:', customerEmail);
+        console.log('Inserted Data (needs to be array with >0 items):', data);
+        
         if (customerEmail && data && data.length > 0) {
           console.log('Sending Email confirmation via Resend...');
           const orderIdsStr = data.map(o => o.display_id || `#${o.id.slice(0, 8)}`).join(', ');

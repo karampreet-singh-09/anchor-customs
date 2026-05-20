@@ -5,11 +5,11 @@ export const TEMPLATES = [
     price10: 999,
     price12: 999,
     image: '/products/MAGAZINE TEMPLATES/CHAAR KADAM-WEBSITE.jpg',
-    description: 'Turn your favorite memories into a real aesthetic magazine made just for you.',
+    description: 'Your camera roll, but make it iconic.',
     category: 'Magazine',
     pages: Array.from({length: 11}, (_, i) => `/products/MAGAZINE TEMPLATES/CHAAR KADAM-WEBSITE_page_${i + 1}.jpg`),
     details: {
-      intro: "Turn your favorite memories into a real aesthetic magazine made just for you.\nPerfect for couples, best friends, birthdays, anniversaries, or simply preserving moments that deserve more than just a gallery folder 💌",
+      intro: "Your camera roll, but make it iconic.",
       included: [
         "12 Pages (24 Sides)",
         "Premium Quality Printing",
@@ -42,11 +42,11 @@ export const TEMPLATES = [
     price10: 999,
     price12: 999,
     image: '/products/MAGAZINE TEMPLATES/KHAT-WEBSITE.jpg',
-    description: 'Turn your favorite memories into a real aesthetic magazine made just for you.',
+    description: 'Your camera roll, but make it iconic.',
     category: 'Magazine',
     pages: Array.from({length: 11}, (_, i) => `/products/MAGAZINE TEMPLATES/KHAT-WEBSITE_page_${i + 1}.jpg`),
     details: {
-      intro: "Turn your favorite memories into a real aesthetic magazine made just for you.\nPerfect for couples, best friends, birthdays, anniversaries, or simply preserving moments that deserve more than just a gallery folder 💌",
+      intro: "Your camera roll, but make it iconic.",
       included: [
         "12 Pages (24 Sides)",
         "Premium Quality Printing",
@@ -79,11 +79,11 @@ export const TEMPLATES = [
     price10: 999,
     price12: 999,
     image: '/products/MAGAZINE TEMPLATES/LE DOOBA-WEBSITE.jpg',
-    description: 'Turn your favorite memories into a real aesthetic magazine made just for you.',
+    description: 'Your camera roll, but make it iconic.',
     category: 'Magazine',
     pages: Array.from({length: 11}, (_, i) => `/products/MAGAZINE TEMPLATES/LE DOOBA-WEBSITE_page_${i + 1}.jpg`),
     details: {
-      intro: "Turn your favorite memories into a real aesthetic magazine made just for you.\nPerfect for couples, best friends, birthdays, anniversaries, or simply preserving moments that deserve more than just a gallery folder 💌",
+      intro: "Your camera roll, but make it iconic.",
       included: [
         "12 Pages (24 Sides)",
         "Premium Quality Printing",
@@ -116,11 +116,11 @@ export const TEMPLATES = [
     price10: 999,
     price12: 999,
     image: '/products/MAGAZINE TEMPLATES/TU CHAHIYE-WEBSITE.jpg',
-    description: 'Turn your favorite memories into a real aesthetic magazine made just for you.',
+    description: 'Your camera roll, but make it iconic.',
     category: 'Magazine',
     pages: Array.from({length: 11}, (_, i) => `/products/MAGAZINE TEMPLATES/TU CHAHIYE-WEBSITE_page_${i + 1}.jpg`),
     details: {
-      intro: "Turn your favorite memories into a real aesthetic magazine made just for you.\nPerfect for couples, best friends, birthdays, anniversaries, or simply preserving moments that deserve more than just a gallery folder 💌",
+      intro: "Your camera roll, but make it iconic.",
       included: [
         "12 Pages (24 Sides)",
         "Premium Quality Printing",
@@ -153,12 +153,12 @@ export const TEMPLATES = [
     price10: 999,
     price12: 999,
     image: '/products/MAGAZINE TEMPLATES/NORMAL TEMPLATE-WEBSITE_page_3.jpg',
-    description: 'Turn your favorite memories into a real aesthetic magazine made just for you.',
+    description: 'Your camera roll, but make it iconic.',
     category: 'Magazine',
     popular: true,
     pages: Array.from({length: 9}, (_, i) => `/products/MAGAZINE TEMPLATES/NORMAL TEMPLATE-WEBSITE_page_${i + 3}.jpg`),
     details: {
-      intro: "Turn your favorite memories into a real aesthetic magazine made just for you.\nPerfect for couples, best friends, birthdays, anniversaries, or simply preserving moments that deserve more than just a gallery folder 💌",
+      intro: "Your camera roll, but make it iconic.",
       included: [
         "12 Pages (24 Sides)",
         "Premium Quality Printing",

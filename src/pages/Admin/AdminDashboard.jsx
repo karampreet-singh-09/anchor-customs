@@ -33,12 +33,17 @@ const AdminDashboard = () => {
 
   const updateStatus = async (orderId, newStatus) => {
     try {
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('orders')
         .update({ order_status: newStatus })
-        .eq('id', orderId);
+        .eq('id', orderId)
+        .select();
 
       if (error) throw error;
+      
+      if (!data || data.length === 0) {
+        throw new Error("Blocked by database security policies (RLS). Please check your Supabase table policies.");
+      }
       
       setOrders(orders.map(o => o.id === orderId ? { ...o, order_status: newStatus } : o));
       toast.success(`Status updated to ${newStatus}`);
