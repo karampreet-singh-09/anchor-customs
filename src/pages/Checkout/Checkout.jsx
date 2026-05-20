@@ -68,6 +68,40 @@ const Checkout = () => {
         console.error('Failed to send WhatsApp message:', waError);
       }
 
+      // Send Email Confirmation
+      try {
+        const customerDetails = cartItems[0]?.customerDetails;
+        const customerEmail = customerDetails?.email || currentUser?.email;
+        if (customerEmail && data && data.length > 0) {
+          console.log('Sending Email confirmation via Resend...');
+          const orderIdsStr = data.map(o => o.display_id || `#${o.id.slice(0, 8)}`).join(', ');
+          const orderedItems = data.map(o => ({
+            id: o.display_id || `#${o.id.slice(0, 8)}`,
+            name: o.template_name,
+            pages: o.pages,
+            price: o.price
+          }));
+
+          const { error: emailError } = await supabase.functions.invoke('send-order-email', {
+            body: {
+              email: customerEmail,
+              customerName: customerDetails?.fullName || currentUser?.user_metadata?.full_name || 'Customer',
+              orderIds: orderIdsStr,
+              items: orderedItems,
+              totalPrice: cartTotal
+            }
+          });
+
+          if (emailError) {
+            console.error('Resend Email confirmation failed:', emailError);
+          } else {
+            console.log('✓ Email confirmation sent successfully.');
+          }
+        }
+      } catch (emailErr) {
+        console.error('Failed to send Email confirmation:', emailErr);
+      }
+
       setIsSuccess(true);
       clearCart();
       toast.success('Order Placed Successfully!');

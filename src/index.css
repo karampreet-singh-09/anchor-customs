@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Amatic+SC:wght@400;700&family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap');
 
 :root {
   --primary: #ffffff;
@@ -15,9 +15,9 @@
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
   --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.08);
   --radius: 40px;
-  --font-serif: 'Playfair Display', serif;
+  --font-serif: 'Impact', sans-serif;
   --font-sans: 'Inter', sans-serif;
-  --font-display: 'Playfair Display', serif;
+  --font-display: 'Impact', sans-serif;
   --font-scribble: 'Caveat', cursive;
 }
 

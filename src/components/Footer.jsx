@@ -23,7 +23,7 @@ const Footer = () => {
           <div>
             <h2 style={{ color: 'var(--text)', marginBottom: isMobile ? '0.5rem' : '1rem', fontFamily: 'var(--font-serif)', fontSize: isMobile ? '1.5rem' : '1.8rem', letterSpacing: '1px', fontWeight: 'bold' }}>Anchor <span style={{ color: 'var(--accent)' }}>Customs</span></h2>
             <p style={{ color: 'var(--text-light)', fontSize: '0.9rem', maxWidth: '300px', lineHeight: '1.6' }}>
-              Turning your memories into something you can hold forever. Based in Delhi, India, delivering nationwide.
+              You might cry (in a cute Way). Turning your memories into something you can hold forever.
             </p>
           </div>
 

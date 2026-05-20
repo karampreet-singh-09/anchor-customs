@@ -385,11 +385,11 @@ const Home = () => {
               fontWeight: 800, 
               margin: 0, 
               letterSpacing: '1px',
-              fontFamily: 'var(--font-sans)',
+              fontFamily: "'Alex Brush', cursive",
               width: '100%',
               textAlign: 'center',
-              textTransform: 'uppercase'
-            }}>BEST SELLING</h2>
+              fontWeight: 400
+            }}>Best Selling</h2>
           </div>
 
           <div style={{ 

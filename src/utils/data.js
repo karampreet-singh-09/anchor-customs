@@ -187,7 +187,7 @@ export const TEMPLATES = [
   },
   {
     id: 'frame_spotify',
-    name: 'Spotify Code Frame',
+    name: 'Spotify Code',
     price10: 699,
     price12: 699,
     image: '/products/FRAMES/a4 frames website_page_13.jpg',
@@ -208,7 +208,7 @@ export const TEMPLATES = [
   },
   {
     id: 'frame_aesthetic',
-    name: 'Polaroid Frame',
+    name: 'Polaroid',
     price10: 699,
     price12: 699,
     image: '/products/FRAMES/a4 frames website_page_4.jpg',
@@ -229,7 +229,7 @@ export const TEMPLATES = [
   },
   {
     id: 'frame_long_distance',
-    name: 'Long Distance Frame',
+    name: 'Long Distance',
     price10: 699,
     price12: 699,
     image: '/products/FRAMES/a4 frames website_page_1.jpg',
@@ -250,7 +250,7 @@ export const TEMPLATES = [
   },
   {
     id: 'frame_chaos',
-    name: 'Chaos Collage Frame',
+    name: 'Chaos Collage',
     price10: 699,
     price12: 699,
     image: '/products/FRAMES/a4 frames website_page_7.jpg',
@@ -271,7 +271,7 @@ export const TEMPLATES = [
   },
   {
     id: 'frame_hopeless',
-    name: 'Hopeless Romantic Frame',
+    name: 'Hopeless Romantic',
     price10: 699,
     price12: 699,
     image: '/products/FRAMES/a4 frames website_page_10.jpg',
@@ -292,7 +292,7 @@ export const TEMPLATES = [
   },
   {
     id: 'frame_film_strip',
-    name: 'Digital Diary Frame',
+    name: 'Digital Diary',
     price10: 649,
     price12: 649,
     image: '/products/FRAMES/8x8 frames website1_page_4.jpg',
@@ -334,7 +334,7 @@ export const TEMPLATES = [
   },
   {
     id: 'frame_pinteresty',
-    name: 'Archive of Us Frame',
+    name: 'Archive of Us',
     price10: 649,
     price12: 649,
     image: '/products/FRAMES/8x8 frames website1_page_1.jpg',
@@ -355,7 +355,7 @@ export const TEMPLATES = [
   },
   {
     id: 'frame_pop_grid',
-    name: 'Pop Grid Frame',
+    name: 'Pop Grid',
     price10: 549,
     price12: 549,
     image: '/products/FRAMES/5  7 inches frame_page_1.jpg',
@@ -569,7 +569,7 @@ export const TEMPLATES = [
   },
   {
     id: 'combo_mag_grid',
-    name: 'Combo 1 — Customized Magazine + Pop Grid Frame',
+    name: 'Combo 1 — Customized Magazine + Pop Grid',
     price10: 1499,
     price12: 1499,
     image: '/products/COMBO 1/5  7 inches frame.jpg',
@@ -600,7 +600,7 @@ export const TEMPLATES = [
   },
   {
     id: 'combo_mag_chaos',
-    name: 'Combo 2 — Customized Magazine + Chaos Collage Frame',
+    name: 'Combo 2 — Customized Magazine + Chaos Collage',
     price10: 1599,
     price12: 1599,
     image: '/products/COMBO 2/a4 frames website.jpg',
