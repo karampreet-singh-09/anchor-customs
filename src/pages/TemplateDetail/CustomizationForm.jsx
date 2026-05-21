@@ -124,7 +124,7 @@ const CustomizationForm = () => {
       return;
     }
 
-    if (template.id !== 'kaleshi_aurat') {
+    if (template.id !== 'kaleshi_aurat' && !template.isHotWheels) {
       if (!isFrame && !coverPhoto) {
         toast.error('Please upload a cover photo');
         return;
@@ -151,7 +151,7 @@ const CustomizationForm = () => {
         });
       }, 100);
 
-      if (template.id !== 'kaleshi_aurat') {
+      if (template.id !== 'kaleshi_aurat' && !template.isHotWheels) {
         const safeName = formData.fullName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
         const folderPath = `${safeName}_${Date.now()}`;
 
@@ -362,7 +362,7 @@ const CustomizationForm = () => {
             </div>
           </div>
 
-          {template.id !== 'kaleshi_aurat' && (
+          {template.id !== 'kaleshi_aurat' && !template.isHotWheels && (
             <>
               {!isFrame && (
                 <div style={{ margin: '2rem 0' }}>

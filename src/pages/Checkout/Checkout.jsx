@@ -28,7 +28,7 @@ const Checkout = () => {
         user_id: currentUser.id,
         template_id: item.templateId,
         template_name: item.templateName,
-        pages: item.pages,
+        pages: isNaN(parseInt(item.pages)) ? 0 : parseInt(item.pages),
         price: item.price,
         customer_details: item.customerDetails,
         images: item.images,

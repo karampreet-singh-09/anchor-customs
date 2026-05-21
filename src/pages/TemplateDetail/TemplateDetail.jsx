@@ -145,7 +145,7 @@ const TemplateDetail = () => {
     addToCart({
       templateId: template.id,
       templateName: template.name,
-      pages: 'Hot Wheels Car',
+      pages: 0,
       price: template.price10,
       images: [template.image],
       coverImage: template.image,
@@ -586,7 +586,7 @@ const TemplateDetail = () => {
             <div className="mobile-sticky-bottom">
               {template.isHotWheels ? (
                 <button
-                  onClick={handleAddHotWheelsToCart}
+                  onClick={handleProceed}
                   disabled={isSoldOut || checkingStock}
                   className="btn btn-primary"
                   style={{
@@ -606,7 +606,7 @@ const TemplateDetail = () => {
                   {checkingStock ? 'Checking stock...' : isSoldOut ? (
                     <><AlertTriangle size={20} /> SOLD OUT</>
                   ) : (
-                    <><ShoppingCart size={20} /> Add to Cart — ₹{template.price10}</>
+                    <>Order Now <ArrowRight size={20} /></>
                   )}
                 </button>
               ) : (
@@ -670,7 +670,7 @@ const TemplateDetail = () => {
                 </div>
               )}
 
-              {template.details.required && (
+              {template.details.required && template.details.required.length > 0 && (
                 <div style={{ flex: isMobile ? '0 0 240px' : '1 1 250px', maxWidth: isMobile ? '240px' : 'none' }}>
                   <h4 style={{ fontSize: '1.1rem', marginBottom: '0.8rem', color: 'var(--accent)' }}>Things Required:</h4>
                   <ul style={{ listStyle: 'none', padding: 0 }}>
