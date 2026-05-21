@@ -62,7 +62,7 @@ const Checkout = () => {
         console.log('Inserted Data (needs to be array with >0 items):', data);
         
         if (customerEmail && data && data.length > 0) {
-          console.log('Sending Email confirmation via Resend...');
+          console.log('Sending Email confirmation via Vercel...');
           const orderIdsStr = data.map(o => o.display_id || `#${o.id.slice(0, 8)}`).join(', ');
           const orderedItems = data.map(o => ({
             id: o.display_id || `#${o.id.slice(0, 8)}`,
@@ -71,20 +71,25 @@ const Checkout = () => {
             price: o.price
           }));
 
-          const { error: emailError } = await supabase.functions.invoke('send-order-email', {
-            body: {
+          const response = await fetch('/api/send-order-email', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
               email: customerEmail,
               customerName: customerDetails?.fullName || currentUser?.user_metadata?.full_name || 'Customer',
               orderIds: orderIdsStr,
               items: orderedItems,
               totalPrice: cartTotal
-            }
+            })
           });
 
-          if (emailError) {
-            console.error('Resend Email confirmation failed:', emailError);
+          if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Vercel Email confirmation failed:', errorData);
           } else {
-            console.log('✓ Email confirmation sent successfully.');
+            console.log('✓ Email confirmation sent successfully via Vercel.');
           }
         }
       } catch (emailErr) {
@@ -215,7 +220,7 @@ const Checkout = () => {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}>
                   <span style={{ fontSize: '0.95rem', fontWeight: '600', color: 'var(--navy)' }}>{item.templateName}</span>
                   <span style={{ fontSize: '0.95rem', fontWeight: '700', color: 'var(--accent)', whiteSpace: 'nowrap' }}>
-                    {item.id === 'free_gift_surprise' ? 'FREE' : `₹${item.price}`}
+                    {item.templateId === 'free_gift_surprise' ? 'FREE' : `₹${item.price}`}
                   </span>
                 </div>
                 {item.customerDetails?.customText && (

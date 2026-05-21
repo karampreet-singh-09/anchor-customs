@@ -220,7 +220,7 @@ const TemplateDetail = () => {
             width: '100%'
           }}>
             {/* Elegant Tab Selector for Hampers & Combos */}
-            {template.pages && template.pages.length > 0 && template.gallery && template.gallery.length > 0 && (
+            {template.pages && template.pages.length > 0 && template.gallery && template.gallery.length > 0 && groupName !== 'Premium Gifts' && (
               <div style={{ 
                 display: 'flex', 
                 justifyContent: 'center', 
@@ -457,7 +457,7 @@ const TemplateDetail = () => {
                 </div>
 
                 {/* Direct link button below slider to transition into the book page-flip */}
-                {template.pages && template.pages.length > 0 && (
+                {template.pages && template.pages.length > 0 && groupName !== 'Premium Gifts' && (
                   <button 
                     type="button"
                     onClick={() => setActiveTab('book')}

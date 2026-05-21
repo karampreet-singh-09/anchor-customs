@@ -569,7 +569,7 @@ export const TEMPLATES = [
     ],
     pages: Array.from({length: 16}, (_, i) => `/products/HAMPER/sakstin hamper magazine _page_${i + 1}.jpg`),
     details: {
-      intro: "The ultimate custom gift collection — designed to turn your favorite memories into something unforgettable 🤍\n\nWHAT MAKES IT SPECIAL :\n• Fully personalized with your photos & memories\n• Premium aesthetic presentation\n• Handmade with attention to detail\n• Emotional & memorable gifting experience\n• 100% customizable for every occasion",
+      intro: "The ultimate custom gift collection — designed to turn your favorite memories into something unforgettable 🤍",
       included: [
         "Custom Magazine: 12 pages (24 sides) of customized magazine capturing your core memories",
         "Two Customized Frames: One sticker-type frame and one aesthetic pop-grid frame with your photos",
@@ -606,7 +606,7 @@ export const TEMPLATES = [
     pageBg: '#fdfdfd',
     pages: Array.from({length: 14}, (_, i) => `/products/CUSTOMISED CALENDAR/customized calendar_page_${i + 1}.jpg`),
     details: {
-      intro: "Start every month with a memory that makes you smile ✨\n\nA personalized aesthetic calendar designed with your favorite photos and moments.\n\nWHY IT’S SPECIAL :\nEvery month holds a different memory, making your calendar feel personal, emotional, and beautifully aesthetic all year long 🤍",
+      intro: "Start every month with a memory that makes you smile ✨\n\nA personalized aesthetic calendar designed with your favorite photos and moments.",
       included: [
         "14-Sided Printed Calendar",
         "Fully Customized Photo Layouts",
@@ -641,7 +641,7 @@ export const TEMPLATES = [
     pageBg: '#fdfdfd',
     pages: Array.from({length: 24}, (_, i) => `/products/SCRAPBOOK/_SCRAPBOOK - website_page_${i + 1}.jpg`).filter(p => !p.endsWith('_page_2.jpg') && !p.endsWith('_page_23.jpg')),
     details: {
-      intro: "A beautifully handcrafted scrapbook designed to preserve your most special memories in the most personal and aesthetic way possible. From pictures and heartfelt moments to memories you never want to forget, every page is carefully designed to feel meaningful, emotional, and unique to you. \n\nThis scrapbook includes 12 pages (24 sides) filled with your favorite photographs and memories, thoughtfully arranged to create a keepsake you can cherish forever. Whether it is for your partner, best friend, family, or even for yourself, it is created to turn ordinary moments into something timeless.",
+      intro: "A beautifully handcrafted scrapbook designed to preserve your most special memories in the most personal and aesthetic way possible. Every page is carefully designed to feel meaningful and unique to you.",
       required: [
         "35–40 Photos",
         "We can also increase the number of pages if you have more photos to include."
@@ -666,7 +666,7 @@ export const TEMPLATES = [
     pageBg: '#fdfdfd',
     pages: Array.from({length: 15}, (_, i) => `/products/standing magazine/standing magazine_page_${i + 1}.jpg`),
     details: {
-      intro: "Turn your favorite memories into a real aesthetic standing magazine made just for you. Designed with a premium white base stand so you can proudly place it on your shelves, desks, side tables, or room corners — no more hiding your memories away in a closet 💌. Perfect for friends, couples, family, siblings, birthdays, anniversaries, or simply preserving moments that deserve more than just a gallery folder.",
+      intro: "Turn your favorite memories into a real aesthetic standing magazine made just for you. Designed with a premium white base stand so you can proudly place it on your shelves or desks.",
       included: [
         "15 Sided Printed Standing Magazine",
         "Premium Quality Printing",
@@ -707,7 +707,7 @@ export const TEMPLATES = [
       '/products/KALESHI AURAT/c6c54c39-f7fe-4442-b808-19bc9c8a6957.jpg'
     ],
     details: {
-      intro: "A statement piece for every unapologetic girl. Made with premium breathable cotton, this white cap features elegant maroon embroidery with the iconic “kaleshi aurat” text and smooch detail for the perfect mix of cute & chaotic energy. Designed for all-day comfort with a structured fit and aesthetic finish — your go-to accessory for casual fits, coffee runs, airport looks, and girls’ days out.",
+      intro: "A statement piece for every unapologetic girl. Made with premium breathable cotton, this white cap features elegant maroon embroidery with the iconic 'kaleshi aurat' text and smooch detail.",
       included: [
         "Premium cotton fabric",
         "High-quality embroidered detailing",
@@ -733,7 +733,7 @@ export const TEMPLATES = [
     ],
     pages: Array.from({length: 9}, (_, i) => `/products/COMBO 1/NORMAL TEMPLATE-WEBSITE_page_${i + 3}.jpg`),
     details: {
-      intro: "A perfect blend of memories and aesthetics.\nThis combo includes our signature customized magazine paired with a beautifully designed pop grid frame, created to turn your favorite moments into something timeless and meaningful.\nThe customized magazine is designed with your pictures, memories, messages, and special moments, carefully arranged to feel personal, emotional, and visually stunning. Every page is crafted to capture your story in the most aesthetic way possible.\nPaired with it is our pop grid frame, perfect for displaying your favorite photographs and adding a personal touch to any space. Together, this combo creates a beautiful balance between keepsake memories and aesthetic décor.\nWhether it is for your partner, best friend, or family, this combo is designed to preserve emotions and moments you would always want to hold close.",
+      intro: "A perfect blend of memories and aesthetics.\nThis combo includes our signature customized magazine paired with a beautifully designed pop grid frame.",
       included: [
         "1x Customized Magazine",
         "1x Pop Grid Frame",
@@ -764,7 +764,7 @@ export const TEMPLATES = [
     ],
     pages: Array.from({length: 9}, (_, i) => `/products/COMBO 2/NORMAL TEMPLATE-WEBSITE_page_${i + 3}.jpg`),
     details: {
-      intro: "A perfect combination of storytelling and creative memories.\nThis combo includes our signature customized magazine along with a chaos collage frame, designed to turn your favorite moments into an aesthetic keepsake you can cherish forever.\nThe customized magazine is personalized with your pictures, memories, conversations, and special moments, thoughtfully designed to feel emotional, unique, and visually beautiful. Every page captures your story in a way that feels personal and timeless.\nPaired with it is our chaos collage frame — a creative arrangement of your favorite photographs that brings together memories, emotions, and moments in the most artistic way possible. Its aesthetic design makes it a perfect addition to any room while keeping your special people and memories close to you every day.\nWhether it is for a relationship, friendship, birthday, anniversary, or simply celebrating moments that matter, this combo is created to preserve emotions in a way that feels both meaningful and unforgettable.",
+      intro: "A perfect combination of storytelling and creative memories.\nThis combo includes our signature customized magazine along with a chaos collage frame.",
       included: [
         "1x Customized Magazine",
         "1x Chaos Collage Frame",
@@ -795,7 +795,7 @@ export const TEMPLATES = [
     ],
     pages: Array.from({length: 9}, (_, i) => `/products/COMBO 3/NORMAL TEMPLATE-WEBSITE_page_${i + 3}.jpg`),
     details: {
-      intro: "A unique combination created for people who love memories with a touch of personality and fun.\nThis combo includes our signature customized magazine paired with a Hot Wheels car, making it a perfect gift that feels both meaningful and memorable.\nThe customized magazine is designed using your pictures, memories, messages, and special moments, carefully arranged to create a personalized keepsake that tells your story beautifully. Every page is crafted to feel emotional, aesthetic, and timeless.\nPaired with it is a Hot Wheels car that adds a creative and playful element to the combo, making it even more special for car lovers and collectors. It is not just a gift, but a thoughtful way of combining emotions, memories, and personal interests into one beautifully curated experience.\nPerfect for birthdays, anniversaries, friendships, or surprising someone with something different, this combo is designed to turn ordinary moments into unforgettable memories.",
+      intro: "A unique combination created for people who love memories with a touch of personality and fun.\nThis combo includes our signature customized magazine paired with a Hot Wheels car.",
       included: [
         "1x Customized Magazine",
         "1x Hot Wheels Car",
