@@ -558,12 +558,12 @@ const TemplateDetail = () => {
               )}
             </div>
 
-            {template.details.privacy && (
-              <div style={{ marginTop: '3rem', padding: '1.5rem', background: '#fff', borderRadius: '12px', borderLeft: '5px solid var(--accent)', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' }}>
-                <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--navy)' }}>Privacy Policy</h4>
-                <p style={{ fontSize: '1rem', color: 'var(--text-muted)', margin: 0, lineHeight: '1.6' }}>{template.details.privacy}</p>
-              </div>
-            )}
+            <div style={{ marginTop: '3rem', padding: '1.5rem', background: '#fff', borderRadius: '12px', borderLeft: '5px solid var(--accent)', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' }}>
+              <h4 style={{ fontSize: '1.2rem', fontFamily: 'var(--font-serif)', marginBottom: '0.5rem', color: 'var(--navy)' }}>Privacy Policy</h4>
+              <p style={{ fontSize: '1rem', color: 'var(--text-muted)', margin: 0, lineHeight: '1.6' }}>
+                Your order will never be posted on our page without your permission. We completely respect your privacy and ensure that all your memories and pictures remain safe and personal.
+              </p>
+            </div>
           </div>
         )}
 
