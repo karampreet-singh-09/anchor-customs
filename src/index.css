@@ -516,6 +516,11 @@ body::before {
     height: 200px !important;
   }
   
+  .cart-item-card img.surprise-img {
+    padding: 3rem !important;
+    object-fit: contain !important;
+  }
+  
   .cart-grid {
     grid-template-columns: 1fr !important;
     gap: 2rem !important;
