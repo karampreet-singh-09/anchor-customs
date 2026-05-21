@@ -36,16 +36,17 @@ const ProductCardContent = ({ template }) => {
         {template.popular && (
           <div style={{ 
             position: 'absolute', 
-            top: isMob ? '0.8rem' : '2rem', 
-            right: '0', 
-            transform: 'translateX(20%)',
-            background: 'var(--accent)', 
+            top: isMob ? '0.8rem' : '1.2rem', 
+            right: isMob ? '0.8rem' : '1.2rem', 
+            background: '#ff4d4f', 
             color: 'white',
-            padding: isMob ? '0.2rem 0.6rem' : '0.3rem 0.8rem', 
+            padding: isMob ? '0.3rem 0.6rem' : '0.4rem 1rem', 
             borderRadius: '20px', 
-            fontSize: isMob ? '0.5rem' : '0.65rem', 
-            fontWeight: 800,
-            boxShadow: '0 4px 10px rgba(0,0,0,0.2)'
+            fontSize: isMob ? '0.6rem' : '0.7rem', 
+            fontWeight: 900,
+            boxShadow: '0 4px 15px rgba(255, 77, 79, 0.4)',
+            zIndex: 10,
+            letterSpacing: '0.5px'
           }}>
             BEST SELLER
           </div>
@@ -690,7 +691,7 @@ const Home = () => {
                   transition={{ duration: 6, repeat: Infinity }}
                   style={{ position: 'absolute', top: '2%', left: '0%', zIndex: 2, filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.15))' }}
                 >
-                  <img src="/products/MAGAZINE TEMPLATES/CHAAR KADAM-WEBSITE.jpg" alt="mockup 1" style={{ width: '60px', borderRadius: '12px', border: '2px solid white' }} />
+                  <img src="/products/MAGAZINE TEMPLATES/LE DOOBA-WEBSITE.jpg" alt="mockup 1" style={{ width: '60px', borderRadius: '12px', border: '2px solid white' }} />
                 </motion.div>
                 
                 <motion.div 
@@ -698,14 +699,7 @@ const Home = () => {
                   transition={{ duration: 8, repeat: Infinity }}
                   style={{ position: 'absolute', top: '10%', right: '0%', zIndex: 3, filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.2))' }}
                 >
-                  <video 
-                    src="/products/vac.mp4" 
-                    autoPlay 
-                    muted 
-                    loop 
-                    playsInline 
-                    style={{ width: '90px', borderRadius: '12px', border: '3px solid white', display: 'block' }} 
-                  />
+                  <img src="/products/HAMPER/1.jpg" alt="Hamper Cover" style={{ width: '90px', borderRadius: '12px', border: '3px solid white', display: 'block' }} />
                 </motion.div>
 
                 <motion.div 
@@ -713,7 +707,7 @@ const Home = () => {
                   transition={{ duration: 7, repeat: Infinity }}
                   style={{ position: 'absolute', top: '68%', left: '15%', zIndex: 2, filter: 'drop-shadow(0 15px 25px rgba(0,0,0,0.1))' }}
                 >
-                  <img src="/products/KALESHI AURAT/686f6b42-274f-4201-b05d-1f74e5f995df.jpg" alt="Apparels" style={{ width: '75px', borderRadius: '12px', border: '2.5px solid white' }} />
+                  <img src="/products/FRAMES/a4 frames website_page_7.jpg" alt="Chaos Collage Frame" style={{ width: '75px', borderRadius: '12px', border: '2.5px solid white' }} />
                 </motion.div>
               </div>
 
@@ -741,7 +735,7 @@ const Home = () => {
                 transition={{ duration: 6, repeat: Infinity }}
                 style={{ position: 'absolute', top: '5%', right: '40%', zIndex: 2, filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.15))' }}
               >
-                <img src="/products/MAGAZINE TEMPLATES/CHAAR KADAM-WEBSITE.jpg" alt="mockup 1" style={{ width: '150px', borderRadius: '12px', border: '4px solid white' }} />
+                <img src="/products/MAGAZINE TEMPLATES/LE DOOBA-WEBSITE.jpg" alt="mockup 1" style={{ width: '150px', borderRadius: '12px', border: '4px solid white' }} />
               </motion.div>
               
               <motion.div 
@@ -749,14 +743,7 @@ const Home = () => {
                 transition={{ duration: 8, repeat: Infinity }}
                 style={{ position: 'absolute', top: '15%', right: '5%', zIndex: 3, filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.2))' }}
               >
-                <video 
-                  src="/products/vac.mp4" 
-                  autoPlay 
-                  muted 
-                  loop 
-                  playsInline 
-                  style={{ width: '250px', borderRadius: '12px', border: '6px solid white', display: 'block' }} 
-                />
+                <img src="/products/HAMPER/1.jpg" alt="Hamper Cover" style={{ width: '250px', borderRadius: '12px', border: '6px solid white', display: 'block' }} />
               </motion.div>
 
               <motion.div 
@@ -764,7 +751,7 @@ const Home = () => {
                 transition={{ duration: 7, repeat: Infinity }}
                 style={{ position: 'absolute', top: '40%', right: '25%', zIndex: 2, filter: 'drop-shadow(0 15px 25px rgba(0,0,0,0.1))' }}
               >
-                <img src="/products/KALESHI AURAT/686f6b42-274f-4201-b05d-1f74e5f995df.jpg" alt="Apparels" style={{ width: '180px', borderRadius: '12px', border: '5px solid white' }} />
+                <img src="/products/FRAMES/a4 frames website_page_7.jpg" alt="Chaos Collage Frame" style={{ width: '180px', borderRadius: '12px', border: '5px solid white' }} />
               </motion.div>
             </>
           )}

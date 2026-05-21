@@ -145,7 +145,7 @@ const TemplateDetail = () => {
     addToCart({
       templateId: template.id,
       templateName: template.name,
-      pages: 'Hot Wheels Car',
+      pages: 0,
       price: template.price10,
       images: [template.image],
       coverImage: template.image,
@@ -586,7 +586,7 @@ const TemplateDetail = () => {
             <div className="mobile-sticky-bottom">
               {template.isHotWheels ? (
                 <button
-                  onClick={handleAddHotWheelsToCart}
+                  onClick={handleProceed}
                   disabled={isSoldOut || checkingStock}
                   className="btn btn-primary"
                   style={{
@@ -606,7 +606,7 @@ const TemplateDetail = () => {
                   {checkingStock ? 'Checking stock...' : isSoldOut ? (
                     <><AlertTriangle size={20} /> SOLD OUT</>
                   ) : (
-                    <><ShoppingCart size={20} /> Add to Cart — ₹{template.price10}</>
+                    <>Order Now <ArrowRight size={20} /></>
                   )}
                 </button>
               ) : (
@@ -670,7 +670,7 @@ const TemplateDetail = () => {
                 </div>
               )}
 
-              {template.details.required && (
+              {template.details.required && template.details.required.length > 0 && (
                 <div style={{ flex: isMobile ? '0 0 240px' : '1 1 250px', maxWidth: isMobile ? '240px' : 'none' }}>
                   <h4 style={{ fontSize: '1.1rem', marginBottom: '0.8rem', color: 'var(--accent)' }}>Things Required:</h4>
                   <ul style={{ listStyle: 'none', padding: 0 }}>
@@ -710,12 +710,12 @@ const TemplateDetail = () => {
               )}
             </div>
 
-            {template.details.privacy && (
-              <div style={{ marginTop: '3rem', padding: '1.5rem', background: '#fff', borderRadius: '12px', borderLeft: '5px solid var(--accent)', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' }}>
-                <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--navy)' }}>Privacy Policy</h4>
-                <p style={{ fontSize: '1rem', color: 'var(--text-muted)', margin: 0, lineHeight: '1.6' }}>{template.details.privacy}</p>
-              </div>
-            )}
+            <div style={{ marginTop: '3rem', padding: '1.5rem', background: '#fff', borderRadius: '12px', borderLeft: '5px solid var(--accent)', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' }}>
+              <h4 style={{ fontSize: '1.2rem', fontFamily: 'var(--font-serif)', marginBottom: '0.5rem', color: 'var(--navy)' }}>Privacy Policy</h4>
+              <p style={{ fontSize: '1rem', color: 'var(--text-muted)', margin: 0, lineHeight: '1.6' }}>
+                Your order will never be posted on our page without your permission. We completely respect your privacy and ensure that all your memories and pictures remain safe and personal.
+              </p>
+            </div>
           </div>
         )}
 
