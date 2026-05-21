@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../supabase/config';
 import { formatDate } from '../../utils/helpers';
-import { CheckCircle, Truck, Printer } from 'lucide-react';
+import { CheckCircle, Truck, Printer, Mail } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { Navigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
@@ -31,6 +31,43 @@ const AdminDashboard = () => {
     if (isAdmin) fetchAllOrders();
   }, [isAdmin]);
 
+  const sendEmailUpdate = async (order, status) => {
+    const email = order.customer_details.email;
+    if (!email) {
+      toast.error('No email address available for this customer.');
+      return;
+    }
+
+    const orderId = order.display_id || `#${order.id.slice(0, 8)}`;
+    
+    const toastId = toast.loading('Sending email update...');
+    try {
+      const response = await fetch('/api/send-status-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          customerName: order.customer_details.fullName,
+          orderId: orderId,
+          templateName: order.template_name,
+          status: status
+        })
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send email');
+      }
+
+      toast.success('Email update sent successfully!', { id: toastId });
+    } catch (error) {
+      console.error('Error sending email:', error);
+      toast.error(`Error: ${error.message}`, { id: toastId });
+    }
+  };
+
   const updateStatus = async (orderId, newStatus) => {
     try {
       const { data, error } = await supabase
@@ -45,8 +82,15 @@ const AdminDashboard = () => {
         throw new Error("Blocked by database security policies (RLS). Please check your Supabase table policies.");
       }
       
+      const updatedOrder = data[0];
       setOrders(orders.map(o => o.id === orderId ? { ...o, order_status: newStatus } : o));
       toast.success(`Status updated to ${newStatus}`);
+      
+      // Prompt to send email update
+      if (window.confirm(`Status updated! Do you want to send an email notification to the customer about the ${newStatus} status?`)) {
+         sendEmailUpdate(updatedOrder, newStatus);
+      }
+
     } catch (error) {
       toast.error('Update failed: ' + error.message);
     }
@@ -98,8 +142,20 @@ const AdminDashboard = () => {
                       <span style={{ display: 'block', fontSize: '0.7rem', color: 'var(--text-muted)' }}>{formatDate(order.created_at)}</span>
                     </td>
                     <td style={{ padding: '1rem' }}>
-                      <span style={{ fontWeight: '600', display: 'block' }}>{order.customer_details.fullName}</span>
-                      <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', marginBottom: '0.5rem' }}>Phone: {order.customer_details.whatsapp}</span>
+                      <span style={{ fontWeight: '600', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        {order.customer_details.fullName}
+                      </span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', marginTop: '0.3rem' }}>
+                        <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{order.customer_details.email || order.customer_details.whatsapp}</span>
+                        <button 
+                          onClick={() => sendEmailUpdate(order, order.order_status)}
+                          className="btn"
+                          style={{ padding: '0.2rem 0.5rem', fontSize: '0.7rem', backgroundColor: 'var(--accent)', color: 'white', border: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem' }}
+                          title="Send Email Update"
+                        >
+                          <Mail size={12} /> Email
+                        </button>
+                      </div>
                       <a 
                         href={order.images?.[0]} 
                         target="_blank" 
@@ -125,7 +181,8 @@ const AdminDashboard = () => {
                           border: '1px solid var(--border)', 
                           fontSize: '0.8rem',
                           backgroundColor: 'var(--primary-light)',
-                          color: 'var(--text)'
+                          color: 'var(--text)',
+                          cursor: 'pointer'
                         }}
                       >
                         <option value="received">Received</option>

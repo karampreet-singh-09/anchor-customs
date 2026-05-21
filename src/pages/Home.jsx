@@ -20,7 +20,7 @@ const ProductCardContent = ({ template }) => {
       {/* Pill Background container */}
       <div style={{
         background: 'rgba(255, 255, 255, 0.25)',
-        borderRadius: '0',
+        borderRadius: '12px',
         padding: '0',
         width: '100%',
         aspectRatio: '1/1',
@@ -60,7 +60,7 @@ const ProductCardContent = ({ template }) => {
               aspectRatio: '1/1',
               objectFit: 'cover', 
               mixBlendMode: 'multiply',
-              borderRadius: '0',
+              borderRadius: '12px',
               filter: 'drop-shadow(0 20px 20px rgba(0,0,0,0.15))'
             }} 
           />
@@ -74,7 +74,7 @@ const ProductCardContent = ({ template }) => {
               aspectRatio: '1/1',
               objectFit: 'cover', 
               mixBlendMode: 'multiply',
-              borderRadius: '0',
+              borderRadius: '12px',
               filter: 'drop-shadow(0 20px 20px rgba(0,0,0,0.15))'
             }} 
           />
@@ -522,7 +522,7 @@ const Home = () => {
                     }}>
                       <div style={{
                         background: 'rgba(255, 255, 255, 0.25)',
-                        borderRadius: '0',
+                        borderRadius: '12px',
                         padding: '0',
                         width: '100%',
                         aspectRatio: '1/1',
@@ -561,7 +561,7 @@ const Home = () => {
                               aspectRatio: '1/1',
                               objectFit: 'cover', 
                               mixBlendMode: 'multiply',
-                              borderRadius: '0',
+                              borderRadius: '12px',
                               filter: 'drop-shadow(0 20px 20px rgba(0,0,0,0.15))'
                             }} 
                           />
@@ -571,7 +571,7 @@ const Home = () => {
                             aspectRatio: '1/1',
                             objectFit: 'cover', 
                             mixBlendMode: 'multiply',
-                            borderRadius: '0',
+                            borderRadius: '12px',
                             filter: 'drop-shadow(0 20px 20px rgba(0,0,0,0.15))'
                           }} />
                         )}
