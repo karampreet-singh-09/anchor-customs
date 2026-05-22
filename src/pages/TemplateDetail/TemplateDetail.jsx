@@ -23,6 +23,7 @@ const TemplateDetail = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedImage, setSelectedImage] = useState(null);
   const bookRef = useRef();
+  const miniBookRef = useRef();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const isComboOrHamper = template && (template.category === 'Hamper' || template.category === 'Combo' || template.category === 'Combos');
 
@@ -453,6 +454,51 @@ const TemplateDetail = () => {
                         background: '#000'
                       }}
                     />
+                  ) : template.magazinePages && currentSlide === 0 ? (
+                    <div style={{ position: 'relative', width: '100%', aspectRatio: isMobile ? '0.73' : '1.47', background: '#fdfdfd', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                      <HTMLFlipBook 
+                        width={isMobile ? 300 : 280} 
+                        height={isMobile ? 424 : 380} 
+                        size="stretch"
+                        minWidth={150}
+                        maxWidth={600}
+                        minHeight={200}
+                        maxHeight={800}
+                        showCover={!isMobile}
+                        usePortrait={isMobile}
+                        drawShadow={true}
+                        maxShadowOpacity={0.5}
+                        mobileScrollSupport={true}
+                        className="flipbook-wrapper"
+                        ref={miniBookRef}
+                      >
+                        {template.magazinePages.map((pageImg, idx) => (
+                          <div key={idx} className="page" style={{ 
+                            backgroundColor: '#fff', 
+                            overflow: 'hidden',
+                            borderLeft: !isMobile && idx % 2 !== 0 ? '1px solid #eee' : 'none', 
+                            borderRight: !isMobile && idx % 2 === 0 ? '1px solid #eee' : 'none'
+                          }}>
+                            <div style={{ position: 'absolute', inset: 0, background: (!isMobile && idx > 0 && idx < template.magazinePages.length - 1) ? (idx % 2 !== 0 ? 'linear-gradient(to right, rgba(0,0,0,0.1) 0%, transparent 10%)' : 'linear-gradient(to left, rgba(0,0,0,0.1) 0%, transparent 10%)') : 'transparent', zIndex: 10, pointerEvents: 'none' }}></div>
+                            <img src={pageImg} alt={`Page ${idx + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                          </div>
+                        ))}
+                      </HTMLFlipBook>
+                      <button 
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); miniBookRef.current?.pageFlip()?.flipPrev(); }}
+                        style={{ position: 'absolute', bottom: '1rem', left: '1rem', background: '#000', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', zIndex: 15, boxShadow: '0 4px 10px rgba(0,0,0,0.3)' }}
+                        aria-label="Previous Magazine Page"
+                      >
+                        <ChevronLeft size={20} color="#fff" />
+                      </button>
+                      <button 
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); miniBookRef.current?.pageFlip()?.flipNext(); }}
+                        style={{ position: 'absolute', bottom: '1rem', right: '1rem', background: '#000', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', zIndex: 15, boxShadow: '0 4px 10px rgba(0,0,0,0.3)' }}
+                        aria-label="Next Magazine Page"
+                      >
+                        <ChevronRight size={20} color="#fff" />
+                      </button>
+                    </div>
                   ) : (
                     <img 
                       src={sliderImages[currentSlide]} 
@@ -465,18 +511,6 @@ const TemplateDetail = () => {
                   
                   {sliderImages.length > 1 && (
                     <>
-                      <button 
-                        onClick={prevSlide}
-                        style={{ position: 'absolute', top: '50%', left: '1rem', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', zIndex: 10, boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}
-                      >
-                        <ChevronLeft size={24} color="var(--navy)" />
-                      </button>
-                      <button 
-                        onClick={nextSlide}
-                        style={{ position: 'absolute', top: '50%', right: '1rem', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', zIndex: 10, boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}
-                      >
-                        <ChevronRight size={24} color="var(--navy)" />
-                      </button>
                       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '1rem', paddingBottom: '1.5rem', width: '100%' }}>
                         <div style={{ display: 'flex', justifyContent: 'center', gap: '0.8rem', flexWrap: 'wrap', marginBottom: '0.8rem' }}>
                           {sliderImages.map((imgUrl, i) => (
