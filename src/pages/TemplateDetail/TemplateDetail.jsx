@@ -725,6 +725,19 @@ const TemplateDetail = () => {
                 </div>
               )}
 
+              {template.details.whatMakesItSpecial && (
+                <div style={{ flex: isMobile ? '0 0 240px' : '1 1 250px', maxWidth: isMobile ? '240px' : 'none' }}>
+                  <h4 style={{ fontSize: '1.1rem', marginBottom: '0.8rem', color: 'var(--accent)' }}>What Makes It Special:</h4>
+                  <ul style={{ listStyle: 'none', padding: 0 }}>
+                    {template.details.whatMakesItSpecial.map((item, i) => (
+                      <li key={i} style={{ marginBottom: '0.6rem', display: 'flex', alignItems: 'flex-start', gap: '0.6rem', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                        <span style={{ color: 'var(--accent)', marginTop: '4px' }}>•</span> {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {template.details.importantInfo && (
                 <div style={{ flex: isMobile ? '0 0 240px' : '1 1 250px', maxWidth: isMobile ? '240px' : 'none' }}>
                   <h4 style={{ fontSize: '1.1rem', marginBottom: '0.8rem', color: 'var(--accent)' }}>Important Information:</h4>
