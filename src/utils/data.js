@@ -656,6 +656,9 @@ export const TEMPLATES = [
       'Hot Wheels',
       'Personalized Letter'
     ],
+    magazinePages: [
+      ...Array.from({length: 16}, (_, i) => `/products/HAMPER/sakstin hamper magazine _page_${i + 1}.jpg`)
+    ],
     details: {
       intro: "The ultimate custom gift collection — designed to turn your favorite memories into something unforgettable 🤍",
       included: [
