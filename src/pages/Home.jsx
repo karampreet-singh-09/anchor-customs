@@ -724,7 +724,7 @@ const Home = () => {
                   transition={{ duration: 8, repeat: Infinity }}
                   style={{ position: 'absolute', top: '10%', right: '0%', zIndex: 3, filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.2))' }}
                 >
-                  <img src="/products/HAMPER/1.jpg" alt="Hamper Cover" style={{ width: '90px', borderRadius: '12px', border: '3px solid white', display: 'block' }} />
+                  <img src="/products/hamper_cover.jpg" alt="Hamper Cover" style={{ width: '90px', borderRadius: '12px', border: '3px solid white', display: 'block' }} />
                 </motion.div>
 
                 <motion.div 
@@ -768,7 +768,7 @@ const Home = () => {
                 transition={{ duration: 8, repeat: Infinity }}
                 style={{ position: 'absolute', top: '15%', right: '5%', zIndex: 3, filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.2))' }}
               >
-                <img src="/products/HAMPER/1.jpg" alt="Hamper Cover" style={{ width: '250px', borderRadius: '12px', border: '6px solid white', display: 'block' }} />
+                <img src="/products/hamper_cover.jpg" alt="Hamper Cover" style={{ width: '250px', borderRadius: '12px', border: '6px solid white', display: 'block' }} />
               </motion.div>
 
               <motion.div 

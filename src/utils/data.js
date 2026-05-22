@@ -567,6 +567,70 @@ export const TEMPLATES = [
     }
   },
   {
+    id: 'mag_song_pt2',
+    name: 'Song Magazine Part 2',
+    price10: 999,
+    price12: 999,
+    image: '/products/MAGAZINE TEMPLATES/song magazine pt.2_page_1.jpg',
+    description: 'Your camera roll, but make it iconic.',
+    category: 'Magazine',
+    pages: Array.from({length: 12}, (_, i) => `/products/MAGAZINE TEMPLATES/song magazine pt.2_page_${i + 1}.jpg`),
+    details: {
+      intro: "Your camera roll, but make it iconic.",
+      included: [
+        "12 Pages (24 Sides)",
+        "Premium Quality Printing",
+        "Aesthetic Layouts & Edits",
+        "Texts, Captions & Memories",
+        "Carefully Designed To Match Your Vibe"
+      ],
+      required: [
+        "35–40 Photos",
+        "(Minimum 20 Photos Required)",
+        "Have more memories? We can also increase the number of pages accordingly ✨"
+      ],
+      perfectFor: [
+        "Anniversaries",
+        "Birthdays",
+        "Couple Gifts",
+        "Friendship Gifts",
+        "Long Distance Relationships",
+        "Memory Keepsakes"
+      ],
+      importantInfo: [
+        "Price: ₹999",
+        "Privacy Policy: Your order will never be posted on our page without your permission. We deeply respect your privacy and personal memories 🤍"
+      ]
+    }
+  },
+  {
+    id: 'frame_lovers_deck',
+    name: "The Lover's Deck",
+    price10: 749,
+    price12: 749,
+    image: '/products/FRAMES/The Lovers Deck_page_1.jpg',
+    gallery: [
+      '/products/FRAMES/The Lovers Deck_page_1.jpg',
+      '/products/FRAMES/The Lovers Deck_page_2.jpg',
+      '/products/FRAMES/The Lovers Deck_page_3.jpg'
+    ],
+    description: 'Turn your favorite memories into a frame that feels straight out of a love story.',
+    category: 'Frames',
+    details: {
+      intro: "Turn your favorite memories into a frame that feels straight out of a love story. Designed in a playing-card aesthetic, this A4-sized customized frame features your best moments in a unique and timeless layout.",
+      size: "A4 Size",
+      price: "₹749",
+      perfectFor: ["Couples", "Friends", "Siblings", "Family & all relationships"],
+      required: ["8 photos"],
+      included: [
+        "A4 Sized Frame",
+        "Playing cards inspired aesthetic",
+        "Unique and timeless layout"
+      ],
+      whatMakesItSpecial: ["Personalized with 8 photos", "A keepsake made to hold the people who always feel like your winning hand ♡"]
+    }
+  },
+  {
     id: 'hamper',
     name: 'The Ultimate Hamper',
     price10: 2999,
@@ -831,15 +895,14 @@ export const TEMPLATES = [
     image: '/products/COMBO 3/5  7 inches frame (1).jpg',
     description: 'A unique combination created for people who love memories with a touch of personality and fun.',
     category: 'Combo',
+    gallery: [
+      '/products/COMBO 3/NORMAL TEMPLATE-WEBSITE.jpg'
+    ],
     pages: [
-      ...Array.from({length: 9}, (_, i) => `/products/COMBO 3/NORMAL TEMPLATE-WEBSITE_page_${i + 3}.jpg`),
-      '/products/COMBO 3/5  7 inches frame (1).jpg',
-      '/products/hotwheels.jpg'
+      ...Array.from({length: 9}, (_, i) => `/products/COMBO 3/NORMAL TEMPLATE-WEBSITE_page_${i + 3}.jpg`)
     ],
     pageLabels: [
-      ...Array.from({length: 9}, () => 'Customized Magazine'),
-      'Frame',
-      'Hot Wheels'
+      ...Array.from({length: 9}, () => 'Customized Magazine')
     ],
     details: {
       intro: "A unique combination created for people who love memories with a touch of personality and fun.\nThis combo includes our signature customized magazine paired with a Hot Wheels car.",
