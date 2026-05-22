@@ -433,7 +433,7 @@ const TemplateDetail = () => {
                   <h3 style={{ marginBottom: '1.5rem', color: 'var(--navy)', fontFamily: 'var(--font-serif)', fontSize: '1.5rem' }}>Also included in this package:</h3>
                 )}
                 <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.15)', background: '#fff' }}>
-                  {sliderImages[currentSlide]?.endsWith('.mp4') ? (
+                  {sliderImages[currentSlide]?.match(/\.(mp4|mov|MOV)$/) ? (
                     <video
                       src={sliderImages[currentSlide]}
                       autoPlay
@@ -524,7 +524,7 @@ const TemplateDetail = () => {
                               }}
                               onClick={() => setCurrentSlide(i)}
                             >
-                              {imgUrl.endsWith('.mp4') ? (
+                              {imgUrl.match(/\.(mp4|mov|MOV)$/) ? (
                                 <video src={imgUrl} style={{ width: '100%', height: '100%', objectFit: 'cover' }} muted />
                               ) : (
                                 <img src={imgUrl} alt={`Thumbnail ${i + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
