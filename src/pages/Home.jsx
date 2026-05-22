@@ -263,7 +263,7 @@ const Home = () => {
               fontStyle: 'italic',
               fontSize: isMobile ? '1.1rem' : '1.3rem', 
               fontWeight: 500, 
-              color: 'var(--accent)',
+              color: '#4a4a4a',
               marginBottom: '0.5rem',
               lineHeight: 1.4,
               letterSpacing: '0.5px'
@@ -704,9 +704,12 @@ const Home = () => {
                   marginBottom: '0.8rem',
                   lineHeight: 1.2
                 }}>About Us</h3>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: 500, marginBottom: 0, lineHeight: 1.6 }}>
-                  Our team is passionate about emotional connections. We love experimenting with memories to create products that not only meet your needs but inspire new possibilities. Together we explore the future of emotional gifting, creating pieces that become your faithful companions.
-                </p>
+                <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: 500, marginBottom: 0, lineHeight: 1.6 }}>
+                  <p style={{ marginBottom: '0.8rem' }}>At Anchor Customs, we turn memories into keepsakes that last forever.</p>
+                  <p style={{ marginBottom: '0.8rem' }}>We create personalized gifts designed to feel meaningful, aesthetic, and truly personal, from customized magazines and photo frames to scrapbooks and collectible pieces. Every product is made with creativity, attention to detail, and emotion at its core.</p>
+                  <p style={{ marginBottom: '0.8rem' }}>With 4000+ customized orders delivered, our goal is to make gifting more memorable and special for every person who shops with us.</p>
+                  <p style={{ marginBottom: 0 }}>We're constantly working on new ideas, products, and experiences to bring even more creativity into personalized gifting, one memory at a time.</p>
+                </div>
               </div>
 
               {/* Right Column (Relative Collage container for mockups) */}
@@ -749,9 +752,12 @@ const Home = () => {
                   marginBottom: '1.5rem',
                   lineHeight: 1.2
                 }}>About Us</h3>
-                <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', fontWeight: 500, marginBottom: 0, lineHeight: 1.6 }}>
-                  Our team is passionate about emotional connections. We love experimenting with memories to create products that not only meet your needs but inspire new possibilities. Together we explore the future of emotional gifting, creating pieces that become your faithful companions.
-                </p>
+                <div style={{ color: 'var(--text-muted)', fontSize: '1.1rem', fontWeight: 500, marginBottom: 0, lineHeight: 1.6 }}>
+                  <p style={{ marginBottom: '1rem' }}>At Anchor Customs, we turn memories into keepsakes that last forever.</p>
+                  <p style={{ marginBottom: '1rem' }}>We create personalized gifts designed to feel meaningful, aesthetic, and truly personal, from customized magazines and photo frames to scrapbooks and collectible pieces. Every product is made with creativity, attention to detail, and emotion at its core.</p>
+                  <p style={{ marginBottom: '1rem' }}>With 4000+ customized orders delivered, our goal is to make gifting more memorable and special for every person who shops with us.</p>
+                  <p style={{ marginBottom: 0 }}>We're constantly working on new ideas, products, and experiences to bring even more creativity into personalized gifting, one memory at a time.</p>
+                </div>
               </div>
 
               {/* Desktop Mockups absolute positioned in the main container */}

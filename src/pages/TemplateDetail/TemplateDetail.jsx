@@ -355,15 +355,13 @@ const TemplateDetail = () => {
                           src={displayPages[0]} 
                           alt="Cover" 
                           style={{ 
-                            width: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? '420px' : '100%', 
-                            height: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? '280px' : '100%', 
+                            width: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? '150%' : '100%', 
+                            height: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? '66.666%' : '100%', 
                             objectFit: template.imageFit || 'cover',
                             transform: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? 'translate(-50%, -50%) rotate(90deg)' : 'none',
                             position: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? 'absolute' : 'relative',
                             top: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? '50%' : 'auto',
-                            left: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? '50%' : 'auto',
-                            minWidth: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? '420px' : 'none',
-                            minHeight: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? '280px' : 'none'
+                            left: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? '50%' : 'auto'
                           }} 
                         />
                       )}
@@ -393,15 +391,13 @@ const TemplateDetail = () => {
                             alt={`Page ${idx + 2}`} 
                             loading="lazy" 
                             style={{ 
-                              width: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? '420px' : '100%', 
-                              height: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? '280px' : '100%', 
+                              width: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? '150%' : '100%', 
+                              height: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? '66.666%' : '100%', 
                               objectFit: template.imageFit || 'cover',
                               transform: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? 'translate(-50%, -50%) rotate(90deg)' : 'none',
                               position: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? 'absolute' : 'relative',
                               top: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? '50%' : 'auto',
-                              left: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? '50%' : 'auto',
-                              minWidth: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? '420px' : 'none',
-                              minHeight: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? '280px' : 'none'
+                              left: (template.category === 'Calendar' || template.category === 'Standing Magazine') ? '50%' : 'auto'
                             }} 
                           />
                         )}
