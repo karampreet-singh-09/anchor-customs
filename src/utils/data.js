@@ -828,18 +828,17 @@ export const TEMPLATES = [
     price10: 1499,
     price12: 1499,
     originalPrice: 1999,
-    image: '/products/COMBO 3/5  7 inches frame (1).jpg',
+    image: '/products/COMBO 3/NORMAL TEMPLATE-WEBSITE.jpg',
     description: 'A unique combination created for people who love memories with a touch of personality and fun.',
     category: 'Combo',
+    gallery: [
+      '/products/COMBO 3/NORMAL TEMPLATE-WEBSITE.jpg'
+    ],
     pages: [
-      ...Array.from({length: 9}, (_, i) => `/products/COMBO 3/NORMAL TEMPLATE-WEBSITE_page_${i + 3}.jpg`),
-      '/products/COMBO 3/5  7 inches frame (1).jpg',
-      '/products/hotwheels.jpg'
+      ...Array.from({length: 9}, (_, i) => `/products/COMBO 3/NORMAL TEMPLATE-WEBSITE_page_${i + 3}.jpg`)
     ],
     pageLabels: [
-      ...Array.from({length: 9}, () => 'Customized Magazine'),
-      'Frame',
-      'Hot Wheels'
+      ...Array.from({length: 9}, () => 'Customized Magazine')
     ],
     details: {
       intro: "A unique combination created for people who love memories with a touch of personality and fun.\nThis combo includes our signature customized magazine paired with a Hot Wheels car.",
