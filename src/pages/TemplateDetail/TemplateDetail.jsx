@@ -834,7 +834,7 @@ const TemplateDetail = () => {
                 <Link key={item.id} to={`/template/${item.id}`} className="product-card-wrapper" onClick={() => window.scrollTo(0, 0)}>
                   <div className="template-card" style={{ height: 'auto', border: '1px solid var(--border)', borderRadius: '12px', overflow: 'hidden', boxShadow: 'var(--shadow)', transition: 'transform 0.3s ease' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-5px)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
                     <div style={{ aspectRatio: item.aspectRatio || '4/5', overflow: 'hidden', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      {(item.popular || item.category === 'Magazine') && (
+                      {(item.popular || item.id === 'mag_normal') && (
                         <div style={{ 
                           position: 'absolute', 
                           top: '0.5rem', 
